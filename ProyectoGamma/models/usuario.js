@@ -13,7 +13,7 @@ module.exports = sequelize.define("usuario", {
   apellido1: Sequelize.STRING(50),
   apellido2: Sequelize.STRING(50),
   correo: Sequelize.STRING(200),
-  password: Sequelize.STRING(50), 
+  password: Sequelize.STRING(300), 
   id_tipo_usuario: Sequelize.INTEGER(11),  
   freezeTableName:true,
   tableName:'usuario'
