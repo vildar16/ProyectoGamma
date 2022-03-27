@@ -1,16 +1,15 @@
 const Sequelize = require("sequelize");
 const sequelize = require("../db");
 
-module.exports = sequelize.define("categoria", {
+module.exports = sequelize.define("metodoDeResolucion", {
 
-  id_categoria: {
+  id_metodo_resolucion: {
     type: Sequelize.INTEGER(11),
     allowNull: false, 
     primaryKey: true
   },
 
-  nombre: Sequelize.STRING(45),
-  color: Sequelize.STRING(6)
+  nombre_metodo_resolucion: Sequelize.STRING(45)
 
 
 });
