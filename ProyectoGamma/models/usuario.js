@@ -15,8 +15,7 @@ module.exports = sequelize.define("usuario", {
   correo: Sequelize.STRING(200),
   password: Sequelize.STRING(300), 
   id_tipo_usuario: Sequelize.INTEGER(11),  
-  freezeTableName:true,
-  tableName:'usuario'
+
 
 
 });

@@ -22,10 +22,6 @@ app.use((req, res, next) => {
   res.send('Welcome to Express');
 });
 
-//DB
-
-//require("./bootstrap")();
-
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
