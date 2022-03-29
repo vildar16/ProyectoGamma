@@ -44,7 +44,7 @@ ControladorCategoria.crearCategoria = async (req, res) => {
 
 
 //@desc: permite borrar una categoría
-//@route: POST api/categorias/borrar/
+//@route: DELETE api/categorias/borrar/
 ControladorCategoria.borrarCategoria = async (req, res) => {
     console.log(req.body);
     const {id_categoria} =req.body;
@@ -82,8 +82,8 @@ ControladorCategoria.borrarCategoria = async (req, res) => {
 
 
 
-//@desc: permite borrar una categoría
-//@route: POST api/categorias/borrar/
+//@desc: permite actualizar una categoría
+//@route: PUT api/categorias/actualizar/
 ControladorCategoria.actualizarCategoria = async (req, res) => {
     console.log(req.body);
     const {id_categoria, nombre, color} =req.body;
@@ -124,7 +124,7 @@ ControladorCategoria.actualizarCategoria = async (req, res) => {
 
 
 
-//@desc: permite autenticar a un usuario
+//@desc: Obtener todas las categorías
 //@route: GET api/categorias/
 ControladorCategoria.getCategorias = async (req, res) => {
 
@@ -148,8 +148,4 @@ ControladorCategoria.getCategorias = async (req, res) => {
 }
 
 
-
-ControladorUsuario.
-
-
-module.exports = ControladorUsuario;
+module.exports = ControladorCategoria;
