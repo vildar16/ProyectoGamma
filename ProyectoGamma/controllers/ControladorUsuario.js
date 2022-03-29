@@ -39,7 +39,14 @@ ControladorUsuario.crearUsuario = async (req, res) => {
        res.status(200).json({
             ok: true,
             msg: `Usuario ${usuario.nombre} creado correctamente.`,
-            data: usuario
+            data: {
+                nombre_usuario: usuario.nombre_usuario,
+                correo: usuario.correo,
+                nombre: usuario.nombre,
+                apellido1: usuario.apellido1,
+                token: await generarJWT(usuario.correo)
+
+            }
 
         })
 
@@ -57,6 +64,8 @@ ControladorUsuario.crearUsuario = async (req, res) => {
 //@desc: permite autenticar a un usuario
 //@route: POST api/usuarios/login/
 ControladorUsuario.login = async (req, res) => {
+
+    console.log(generarJWT('token'));
 
     const {correo, password} = req.body;
 
@@ -77,7 +86,8 @@ ControladorUsuario.login = async (req, res) => {
                 nombre_usuario: datosUsuario.nombre_usuario,
                 correo: datosUsuario.correo,
                 nombre: datosUsuario.nombre,
-                apellido1: datosUsuario.apellido1
+                apellido1: datosUsuario.apellido1,
+                token: await generarJWT(usuario.correo)
 
             }
         })
@@ -117,9 +127,36 @@ ControladorUsuario.getUsuarios = async (req, res) => {
 }
 
 
-ControladorUsuario.generarJWT = async (nombre_usuario) =>{
-    console.log(process.env.JWT_SECRET);
-    return jwt.sign({nombre_usuario}, process.env.JWT_SECRET)
+ControladorUsuario.autorizacion = async(req, res) =>{
+    try{
+
+        console.log(req.correo);
+        const [usuario]  = await Usuario.findAll({
+    
+            where: {
+                correo: req.correo.correo
+            }
+        })
+    
+        const datosUsuario = usuario.dataValues;
+    
+        res.status(200).json({
+            correo: datosUsuario.correo,
+            nombre_usuario: datosUsuario.nombre_usuario,
+            nombre: datosUsuario.nombre,
+            apellido1: datosUsuario.apellido1
+        })
+    }catch(err){
+        console.error(err.message);
+      res.json({
+        error: "Error, usuario no autorizado",
+      });
+    }
+}
+
+const generarJWT = async (correo) =>{
+    const token = await jwt.sign({correo}, process.env.JWT_SECRET, {expiresIn: '20d'})
+    return token
 }
 
 
