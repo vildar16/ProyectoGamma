@@ -64,43 +64,46 @@ ControladorUsuario.crearUsuario = async (req, res) => {
 //@desc: permite autenticar a un usuario
 //@route: POST api/usuarios/login/
 ControladorUsuario.login = async (req, res) => {
-
-    console.log(generarJWT('token'));
-
-    const {correo, password} = req.body;
-
-    const [usuario]  = await Usuario.findAll({
-
-        where: {
-            correo: correo
-        }
-    })
-
-    const datosUsuario = usuario.dataValues;
-    console.log(process.env.JWT_SECRET);
-   if(datosUsuario && (await bcrypt.compare(password, datosUsuario.password))){
-        return res.status(200).json({
-            ok: true,
-            msg: `Usuario ${datosUsuario.nombre} logueado correctamente.`,
-            data: {
-                nombre_usuario: datosUsuario.nombre_usuario,
-                correo: datosUsuario.correo,
-                nombre: datosUsuario.nombre,
-                apellido1: datosUsuario.apellido1,
-                token: await generarJWT(usuario.correo)
-
-            }
-        })
-    }else{
-        return res.status(500).json({
-            ok: false,
-            msg: 'Error al loguearse, contraseña o correo incorrecto.'
-        })
-
-
-
-    }
+    try {
+        
+        const {correo, password} = req.body;
     
+        const usuario = await Usuario.findOne({ where: { correo: correo } });
+        
+        
+    
+       if(!(usuario===null) && usuario.dataValues && (await bcrypt.compare(password, usuario.dataValues.password))){
+    
+            const datosUsuario = usuario.dataValues;
+    
+            return res.status(200).json({
+                ok: true,
+                msg: `Usuario ${datosUsuario.nombre} logueado correctamente.`,
+                data: {
+                    nombre_usuario: datosUsuario.nombre_usuario,
+                    correo: datosUsuario.correo,
+                    nombre: datosUsuario.nombre,
+                    apellido1: datosUsuario.apellido1,
+                    token: await generarJWT(usuario.correo)
+    
+                }
+            })
+        }else{
+            return res.status(400).json({
+                ok: false,
+                msg: 'Error al loguearse, contraseña o correo incorrecto.'
+            })
+    
+        }
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            ok: false,
+            msg: 'Error al loguearse.'
+        })
+        
+    }
+
 }
 
 
