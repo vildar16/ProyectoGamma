@@ -24,7 +24,6 @@ export const Login = () => {
 
     const validarForm = () =>{
         if(!validator.isEmail(correo)){
-            setValidation({ok: false, msg: "Formato de correo es invalido."})
             return{ok: false, msg: "Formato de email incorrecto."}
         }
         return{ok: true, msg: "Formato correcto."}
@@ -32,7 +31,7 @@ export const Login = () => {
     
     const handleLogin = async (e) => {
         e.preventDefault();
-        const {ok, msg} = validarForm();
+        setValidation(validarForm());
 
         if(ok){
 
