@@ -29,3 +29,5 @@ app.listen(port, () => {
 
 app.use('/api/usuarios', require('./routes/usuario'));
 app.use('/api/categorias', require('./routes/categoria'));
+app.use('/api/problemas', require('./routes/problemaCatalogo'));
+app.use('/api/instancias', require('./routes/problemaInstancia'));

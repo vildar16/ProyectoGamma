@@ -26,8 +26,8 @@ ControladorCategoria.crearCategoria = async (req, res) => {
             ok: true,
             msg: `Categoría ${categoria.nombre} creada correctamente.`,
             data: {
-                nombre: nombre,
-                color: color
+                nombre: categoria.nombre,
+                color: categoria.color
             }
         })
 
@@ -51,7 +51,7 @@ ControladorCategoria.borrarCategoria = async (req, res) => {
     
     try {
 
-        if(!nombre || !color){
+        if(!id_categoria){
             res.status(400).json({
                 ok: false,
                 msg: 'Campos requeridos son nulos o no válidos.'
