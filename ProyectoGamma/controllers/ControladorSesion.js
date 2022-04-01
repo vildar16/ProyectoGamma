@@ -1,4 +1,5 @@
 const ControladorSesion = {};
+const sequelize = require('../db');
 const Sesion = require('../models/sesion');
 //require('dotenv').config();
 
@@ -170,6 +171,29 @@ ControladorSesion.getSesion = async (req, res) => {
         res.status(500).json({
             ok: false,
             msg: 'Error al obtener la sesion.'
+        })
+
+    }
+    
+}
+
+
+
+ControladorSesion.getCategorias_x_sesion = async (req, res) => {
+    console.log(req.body);
+    const {id_sesion} =req.body;
+
+    try{
+        
+        const [sesion_x_categoria] = await sequelize.query(`SELECT c.id_categoria, c.nombre, c.color FROM categoria c JOIN categorias_x_sesion cxs on c.id_categoria = cxs.id_categoria WHERE cxs.id_sesion = ${id_sesion}`)
+        res.json({message: sesion_x_categoria });
+
+    }catch(error){
+
+        console.log(error)
+        res.status(500).json({
+            ok: false,
+            msg: 'Error al asignar categoría.'
         })
 
     }

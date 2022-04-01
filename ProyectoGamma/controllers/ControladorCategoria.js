@@ -6,7 +6,7 @@ const Categoria = require('../models/categoria');
 //@route: POST api/categorias/crear/
 ControladorCategoria.crearCategoria = async (req, res) => {
     console.log(req.body);
-    const {nombre, color} =req.body;
+    const {nombre, color, id_sesion} =req.body;
     
     try {
 
@@ -21,6 +21,7 @@ ControladorCategoria.crearCategoria = async (req, res) => {
             nombre: nombre,
             color: color
         })
+        const cat = await setCategoria(categoria.id_categoria, id_sesion)
         
         res.status(200).json({
             ok: true,
@@ -171,6 +172,25 @@ ControladorCategoria.getCategoria = async (req, res) => {
             ok: false,
             msg: 'Error al obtener la categoría.'
         })
+
+    }
+    
+}
+
+
+
+const setCategoria = async (id_categoria, id_sesion) => {
+
+    try{
+
+        const sesion_x_categoria = await sequelize.query(`INSERT INTO categorias_x_sesion (id_categoria, id_sesion) VALUES (${id_categoria}, ${id_sesion})`)
+
+        return sesion_x_categoria
+
+    }catch(error){
+
+        console.log(error)
+        return 'Error al asignar categoría.'
 
     }
     
