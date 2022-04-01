@@ -164,5 +164,53 @@ const generarJWT = async (correo) =>{
 
 
 
+//@desc: permite ingresar un usuario a una sesion
+//@route: POST api/usuarios/ingresar_sesion
+ControladorUsuario.ingresarSesion = async (req, res) => {
+    console.log(req.body);
+    const {nombre_usuario, codigo_sesion} =req.body;
+
+    try{
+
+        const sesion_x_usuario = await sequelize.query(`INSERT INTO usuarios_x_sesion (id_usuario, id_sesion) VALUES ("${nombre_usuario}", ${codigo_sesion})`)
+        res.json({message: sesion_x_usuario });
+
+    }catch(error){
+
+        console.log(error)
+        res.status(500).json({
+            ok: false,
+            msg: 'Error al asignar usuario a la sesión.'
+        })
+
+    }
+    
+}
+
+
+
+//@desc: obtiene sesiones de un usuario
+//@route: GET api/usuarios/sesiones_x_usuario
+ControladorUsuario.sesiones_x_usuario = async (req, res) => {
+    console.log(req.body);
+    const {nombre_usuario} =req.params;
+
+    try{
+        
+        const [sesion_x_usuario] = await sequelize.query(`SELECT s.codigo_sesion, s.nombre_sesion FROM sesion s JOIN usuarios_x_sesion uxs on s.codigo_sesion = uxs.id_sesion WHERE uxs.id_usuario = "${nombre_usuario}"`)
+        res.json({message: sesion_x_usuario });
+
+    }catch(error){
+
+        console.log(error)
+        res.status(500).json({
+            ok: false,
+            msg: 'Error al obtener sesiones del usuario.'
+        })
+
+    }
+    
+}
+
 
 module.exports = ControladorUsuario;
