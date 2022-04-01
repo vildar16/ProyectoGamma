@@ -70,7 +70,8 @@ export const Registro = () => {
                     type: types.login,
                     payload: { 
                         nombre_usuario: res.data.data.nombre_usuario,
-                        token: res.data.data.token
+                        token: res.data.data.token,
+                        id_tipo_usuario: res.data.data.id_tipo_usuario
                     }
                 }
                 dispatch(action);

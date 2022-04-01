@@ -84,7 +84,8 @@ ControladorUsuario.login = async (req, res) => {
                     correo: datosUsuario.correo,
                     nombre: datosUsuario.nombre,
                     apellido1: datosUsuario.apellido1,
-                    token: await generarJWT(usuario.correo)
+                    token: await generarJWT(usuario.correo),
+                    id_tipo_usuario: datosUsuario.id_tipo_usuario
     
                 }
             })

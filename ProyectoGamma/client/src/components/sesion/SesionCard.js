@@ -1,5 +1,5 @@
 import React from 'react'
-import { GrCatalogOption } from 'react-icons/gr';
+import { GrCatalogOption, BsPeople } from 'react-icons/bs';
 import {Link} from 'react-router-dom'
 
 
@@ -7,7 +7,7 @@ export const SesionCard = ({ sesion, getSesiones }) => {
 
 
   return (
-    <div className="col-md-4 login-form-2 m-1">
+    <div className="col-md-4 login-form-1 m-1">
         <div>
           <h3>
             {sesion.nombre_sesion}
@@ -15,15 +15,17 @@ export const SesionCard = ({ sesion, getSesiones }) => {
 
         </div>
         <div className="d-flex  justify-content-center">
-          <GrCatalogOption style={{ color: 'red', fontSize: "5em" }} />
+          <BsPeople style={{ color: 'red', fontSize: "5em" }} />
         </div>
-
+    <center>
         <Link
           to={"/categoria/"+sesion.codigo_sesion}
           className="btnSubmit">
-          Ingresar
+          Ver categorias
 
         </Link>
+
+    </center>
 
 
     </div>

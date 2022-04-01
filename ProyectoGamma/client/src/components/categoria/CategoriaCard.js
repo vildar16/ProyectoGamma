@@ -9,7 +9,7 @@ export const CategoriaCard = ({categoria, getCategorias}) => {
 
 
   return (
-    <div className="col-sm-4 login-form-2 m-1">
+    <div className="col-sm-4 login-form-1 m-1">
         
             <div>
                 <h3>

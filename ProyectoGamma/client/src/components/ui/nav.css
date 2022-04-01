@@ -1,0 +1,14 @@
+.navbar-custom {
+    background-color: #f53240;
+}
+        /* Modify brand and text color */
+         
+.navbar-custom .navbar-brand,
+.navbar-custom .navbar-text {
+    color: white;
+}
+
+.navbar-custom .navbar-log {
+    color: black;
+}
+

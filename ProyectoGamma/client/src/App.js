@@ -22,6 +22,7 @@ export const App = () => {
   return (
 
     <AuthContext.Provider value={{usuario, dispatch}}>
+      <style>{'body {background-color: #7cdbd5;'}</style>
 
       <AppRouter>
         

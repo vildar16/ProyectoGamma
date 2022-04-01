@@ -36,13 +36,13 @@ export default function Placeholder() {
       <div className="row">
 
         <div className="col-md-4 m-4 div-main div-with-scroll" >
-          <h1>Ingresar Sesión</h1>
+          <h1>Ingresar a una sesión</h1>
           <JoinForm getSesionesUsuario={getSesionesUsuario} nombre_usuario={usuario.nombre_usuario}></JoinForm>
 
         </div>
 
         <div className="col-md-7 div-main m-4">
-          <h1>Sesiones</h1>
+          <h1>Mis Sesiones</h1>
 
 
 

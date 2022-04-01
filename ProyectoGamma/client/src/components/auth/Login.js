@@ -38,11 +38,13 @@ export const Login = () => {
             try {
                 
                 const res = await axios.post('http://localhost:5000/api/usuarios/login', formValues);
+                console.log(res)
                 const action = {
                     type: types.login,
                     payload: { 
                         nombre_usuario: res.data.data.nombre_usuario,
-                        token: res.data.data.token
+                        token: res.data.data.token,
+                        id_tipo_usuario: res.data.data.id_tipo_usuario
                     }
                 }
 
