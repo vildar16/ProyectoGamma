@@ -6,11 +6,11 @@ const Problema = require('../models/problemaCatalogo');
 //@route: POST api/problemas/crear/
 ControladorProblemaCatalogo.crearProblema = async (req, res) => {
     console.log(req.body);
-    const {nombre, link} =req.body;
+    const {id_problema, nombre, link} =req.body;
     
     try {
 
-        if(!nombre || !link){
+        if(!id_problema || !nombre || !link){
             res.status(400).json({
                 ok: false,
                 msg: 'Campos requeridos son nulos o no válidos.'
@@ -18,6 +18,7 @@ ControladorProblemaCatalogo.crearProblema = async (req, res) => {
         }
         
         const problema = await Problema.create({
+            id_problema: id_problema,
             nombre: nombre,
             link: link
         })
@@ -26,6 +27,7 @@ ControladorProblemaCatalogo.crearProblema = async (req, res) => {
             ok: true,
             msg: `Problema ${problema.nombre} creado correctamente.`,
             data: {
+                id_problema: problema.id_problema,
                 nombre: problema.nombre,
                 link: problema.link
             }

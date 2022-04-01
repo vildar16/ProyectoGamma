@@ -5,6 +5,7 @@ module.exports = sequelize.define("problemaInstancia", {
 
   id_problemaInstancia: {
     type: Sequelize.INTEGER(11),
+    autoIncrement: true,
     allowNull: false, 
     primaryKey: true
   },
