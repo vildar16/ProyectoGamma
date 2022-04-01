@@ -97,7 +97,7 @@ ControladorSesion.actualizarSesion = async (req, res) => {
             })
         }
         
-        await Categoria.update({
+        await Sesion.update({
             codigo_sesion: codigo_sesion,
             nombre_sesion: nombre_sesion
         }, {

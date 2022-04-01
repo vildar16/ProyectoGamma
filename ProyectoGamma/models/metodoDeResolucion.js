@@ -5,6 +5,7 @@ module.exports = sequelize.define("metodoDeResolucion", {
 
   id_metodo_resolucion: {
     type: Sequelize.INTEGER(11),
+    autoIncrement: true,
     allowNull: false, 
     primaryKey: true
   },

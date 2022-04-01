@@ -20,6 +20,7 @@ app.use('/api/categorias', require('./routes/categoria'));
 app.use('/api/sesiones', require('./routes/sesiones'));
 app.use('/api/problemas', require('./routes/problemaCatalogo'));
 app.use('/api/instancias', require('./routes/problemaInstancia'));
+app.use('/api/metodos', require('./routes/metodoResolucion'));
 
 
 app.use((req, res, next) => {
