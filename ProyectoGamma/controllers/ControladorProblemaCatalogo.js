@@ -131,7 +131,7 @@ ControladorProblemaCatalogo.getProblemas = async (req, res) => {
     try{
 
         const problemas = await Problema.findAll({
-            attributes: ['nombre', 'link']
+            attributes: ['id_problema', 'nombre', 'link']
         })
         res.json({message: problemas });
 

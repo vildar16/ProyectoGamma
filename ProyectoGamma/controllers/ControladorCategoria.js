@@ -1,5 +1,5 @@
 const ControladorCategoria = {};
-const Categoria = require('../models/Categoria');
+const Categoria = require('../models/categoria');
 //require('dotenv').config();
 
 //@desc: permite crear una categoría
@@ -131,7 +131,7 @@ ControladorCategoria.getCategorias = async (req, res) => {
     try{
 
         const categorias = await Categoria.findAll({
-            attributes: ['nombre', 'color']
+            attributes: ['id_categoria', 'nombre', 'color']
         })
         res.json({message: categorias });
 

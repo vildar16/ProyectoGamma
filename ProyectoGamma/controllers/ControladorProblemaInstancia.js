@@ -134,7 +134,7 @@ ControladorProblemaInstancia.getInstancias = async (req, res) => {
     try{
 
         const instancias = await ProblemaInstancia.findAll({
-            attributes: ['id_usuario', 'id_problema_catalogo', 'id_metodo_resolucion', 'resuelto']
+            attributes: ['id_problemaInstancia', 'id_usuario', 'id_problema_catalogo', 'id_metodo_resolucion', 'resuelto']
         })
         res.json({message: instancias });
 
