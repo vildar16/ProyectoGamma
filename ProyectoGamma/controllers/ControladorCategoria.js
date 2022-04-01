@@ -148,4 +148,34 @@ ControladorCategoria.getCategorias = async (req, res) => {
 }
 
 
+
+//@desc: Obtener una categoría
+//@route: GET api/categorias/:id
+ControladorCategoria.getCategoria = async (req, res) => {
+    console.log(req.body);
+    const {id_categoria} =req.body;
+
+    try{
+
+        const categoria = await Categoria.findAll({
+            where: {
+                id_categoria: id_categoria
+            }
+        })
+        res.json({message: categoria });
+
+    }catch(error){
+
+        console.log(error)
+        res.status(500).json({
+            ok: false,
+            msg: 'Error al obtener la categoría.'
+        })
+
+    }
+    
+}
+
+
+
 module.exports = ControladorCategoria;

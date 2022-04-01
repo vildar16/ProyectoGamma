@@ -145,4 +145,34 @@ ControladorMetodoResolucion.getMetodos = async (req, res) => {
 }
 
 
+
+//@desc: Obtener un método de resolución
+//@route: GET api/metodos/:id
+ControladorMetodoResolucion.getMetodo = async (req, res) => {
+    console.log(req.body);
+    const {id_metodo_resolucion} =req.body;
+
+    try{
+
+        const metodo = await Metodo.findAll({
+            where: {
+                id_metodo_resolucion: id_metodo_resolucion
+            }
+        })
+        res.json({message: metodo });
+
+    }catch(error){
+
+        console.log(error)
+        res.status(500).json({
+            ok: false,
+            msg: 'Error al obtener el método de resolución.'
+        })
+
+    }
+    
+}
+
+
+
 module.exports = ControladorMetodoResolucion;

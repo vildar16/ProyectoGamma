@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const { crearMetodo, borrarMetodos, actualizarMetodo, getMetodos} = require('../controllers/ControladorMetodoResolucion');
+const { crearMetodo, borrarMetodos, actualizarMetodo, getMetodos, getMetodo} = require('../controllers/ControladorMetodoResolucion');
 
 router.route('/crear')
     .post(crearMetodo)
@@ -14,5 +14,8 @@ router.route('/actualizar')
 
 router.route('')
     .get(getMetodos)
+
+router.route('/:id')
+    .get(getMetodo)
 
 module.exports = router;

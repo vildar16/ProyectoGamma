@@ -150,4 +150,34 @@ ControladorProblemaCatalogo.getProblemas = async (req, res) => {
 }
 
 
+
+//@desc: Obtener un problema
+//@route: GET api/problemas/:id
+ControladorProblemaCatalogo.getProblema = async (req, res) => {
+    console.log(req.body);
+    const {id_problema} =req.body;
+
+    try{
+
+        const problema = await Problema.findAll({
+            where: {
+                id_problema: id_problema
+            }
+        })
+        res.json({message: problema });
+
+    }catch(error){
+
+        console.log(error)
+        res.status(500).json({
+            ok: false,
+            msg: 'Error al obtener el problema.'
+        })
+
+    }
+    
+}
+
+
+
 module.exports = ControladorProblemaCatalogo;

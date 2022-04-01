@@ -147,4 +147,35 @@ ControladorSesion.getSesiones = async (req, res) => {
     
 }
 
+
+
+//@desc: Obtener una sesión
+//@route: GET api/sesiones/:id
+ControladorSesion.getSesion = async (req, res) => {
+    console.log(req.body);
+    const {codigo_sesion} =req.body;
+
+    try{
+
+        const sesion = await Sesion.findAll({
+            where: {
+                codigo_sesion: codigo_sesion
+            }
+        })
+        res.json({message: sesion });
+
+    }catch(error){
+
+        console.log(error)
+        res.status(500).json({
+            ok: false,
+            msg: 'Error al obtener la sesion.'
+        })
+
+    }
+    
+}
+
+
+
 module.exports = ControladorSesion;

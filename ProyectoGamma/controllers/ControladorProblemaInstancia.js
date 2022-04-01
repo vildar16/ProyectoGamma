@@ -151,4 +151,34 @@ ControladorProblemaInstancia.getInstancias = async (req, res) => {
 }
 
 
+
+//@desc: Obtener una instancia de un problema
+//@route: GET api/instancias/:id
+ControladorProblemaInstancia.getInstancia = async (req, res) => {
+    console.log(req.body);
+    const {id_problemaInstancia} =req.body;
+
+    try{
+
+        const instancia = await ProblemaInstancia.findAll({
+            where: {
+                id_problemaInstancia: id_problemaInstancia
+            }
+        })
+        res.json({message: instancia });
+
+    }catch(error){
+
+        console.log(error)
+        res.status(500).json({
+            ok: false,
+            msg: 'Error al obtener la instancia al problema.'
+        })
+
+    }
+    
+}
+
+
+
 module.exports = ControladorProblemaInstancia;

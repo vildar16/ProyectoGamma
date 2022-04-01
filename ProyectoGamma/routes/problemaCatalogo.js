@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const { crearProblema, borrarProblema, actualizarProblema, getProblemas} = require('../controllers/ControladorProblemaCatalogo');
+const { crearProblema, borrarProblema, actualizarProblema, getProblemas, getProblema} = require('../controllers/ControladorProblemaCatalogo');
 
 router.route('/crear')
     .post(crearProblema)
@@ -14,5 +14,8 @@ router.route('/actualizar')
 
 router.route('')
     .get(getProblemas)
+
+router.route('/:id')
+    .get(getProblema)
 
 module.exports = router;
