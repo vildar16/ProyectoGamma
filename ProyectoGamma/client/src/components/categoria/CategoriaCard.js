@@ -1,23 +1,24 @@
 import React from 'react'
 import { FaCircle } from 'react-icons/fa';
+import './categoria.css'
 
 
-export const CategoriaCard = () => {
+export const CategoriaCard = ({categoria, getCategorias}) => {
 
 
 
-    
+
   return (
-    <div className="col-md-6 login-form-2">
+    <div className="col-md-4 login-form-2 ">
         <div className="row">
             <div className='col-md-9'>
                 <h3>
-                Crear asdsad sadsa dsadsa dsa dsa dsa d
+                {categoria.nombre}
                 </h3>
                 
             </div>
-            <div className='col-md-3'>
-                <FaCircle style={{color: 'red', fontSize: "5em"}}/>
+            <div className='col-md-3 '>
+                <FaCircle style={{color: categoria.color, fontSize: "5em" }}/>
             </div>
 
 
