@@ -7,15 +7,14 @@ export const SesionCard = ({ sesion, getSesiones }) => {
 
 
   return (
-    <div className="col-md-4 login-form-2">
-      <div className="row">
-        <div className='col-md-9'>
+    <div className="col-md-4 login-form-2 m-1">
+        <div>
           <h3>
             {sesion.nombre_sesion}
           </h3>
 
         </div>
-        <div className='col-md-3'>
+        <div className="d-flex  justify-content-center">
           <GrCatalogOption style={{ color: 'red', fontSize: "5em" }} />
         </div>
 
@@ -25,10 +24,6 @@ export const SesionCard = ({ sesion, getSesiones }) => {
           Ingresar
 
         </Link>
-
-
-
-      </div>
 
 
     </div>
