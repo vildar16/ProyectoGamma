@@ -10,7 +10,7 @@ export const DashboardRoutes = () => {
         <Navbar />
         
         <Routes>
-            <Route path="categoria" element={<Categoria />} />
+            <Route path="categoria/:codigo_sesion" element={<Categoria />} />
             <Route path="sesion" element={<Sesion />} />
             <Route path="/" element={<Placeholder />} />
            

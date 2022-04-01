@@ -153,8 +153,7 @@ ControladorSesion.getSesiones = async (req, res) => {
 //@desc: Obtener una sesión
 //@route: GET api/sesiones/:id
 ControladorSesion.getSesion = async (req, res) => {
-    console.log(req.body);
-    const {codigo_sesion} =req.body;
+    const {codigo_sesion} =req.params;
 
     try{
 
@@ -181,7 +180,7 @@ ControladorSesion.getSesion = async (req, res) => {
 
 ControladorSesion.getCategorias_x_sesion = async (req, res) => {
     console.log(req.body);
-    const {id_sesion} =req.body;
+    const {id_sesion} =req.params;
 
     try{
         

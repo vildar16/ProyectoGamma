@@ -15,10 +15,10 @@ router.route('/actualizar')
 router.route('')
     .get(getSesiones)
 
-router.route('/categorias_x_sesion')
+router.route('/categorias_x_sesion/:id_sesion')
     .get(getCategorias_x_sesion)
 
-router.route('/:id')
+router.route('/:codigo_sesion')
     .get(getSesion)
 
 module.exports = router;

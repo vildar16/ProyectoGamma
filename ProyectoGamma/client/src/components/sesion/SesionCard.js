@@ -19,7 +19,7 @@ export const SesionCard = ({ sesion, getSesiones }) => {
         </div>
 
         <Link
-          to="/categoria"
+          to={"/categoria/"+sesion.codigo_sesion}
           className="btnSubmit">
           Ingresar
 
