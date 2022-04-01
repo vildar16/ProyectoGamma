@@ -6,11 +6,11 @@ const Sesion = require('../models/sesion');
 //@route: POST api/sesiones/crear/
 ControladorSesion.crearSesion = async (req, res) => {
     console.log(req.body);
-    const {codigo, nombre} =req.body;
+    const {codigo_sesion, nombre_sesion} =req.body;
     
     try {
 
-        if(!codigo || !nombre){
+        if(!codigo_sesion || !nombre_sesion){
             res.status(400).json({
                 ok: false,
                 msg: 'Campos requeridos son nulos o no válidos.'
@@ -18,16 +18,16 @@ ControladorSesion.crearSesion = async (req, res) => {
         }
         
         const sesion = await Sesion.create({
-            codigo: codigo,
-            sesion: sesion
+            codigo_sesion: codigo_sesion,
+            nombre_sesion: nombre_sesion
         })
         
         res.status(200).json({
             ok: true,
-            msg: `Sesión ${sesion.nombre} creada correctamente.`,
+            msg: `Sesión ${sesion.nombre_sesion} creada correctamente.`,
             data: {
-                codigo: sesion.codigo,
-                nombre: sesion.nombre
+                codigo_sesion: sesion.codigo_sesion,
+                nombre_sesion: sesion.nombre_sesion
             }
         })
 
@@ -131,7 +131,7 @@ ControladorSesion.getSesiones = async (req, res) => {
     try{
 
         const sesiones = await Sesion.findAll({
-            attributes: ['codigo', 'nombre']
+            attributes: ['codigo_sesion', 'nombre_sesion']
         })
         res.json({message: sesiones});
 
