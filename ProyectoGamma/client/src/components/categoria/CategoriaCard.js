@@ -9,15 +9,15 @@ export const CategoriaCard = ({categoria, getCategorias}) => {
 
 
   return (
-    <div className="col-md-4 login-form-2 ">
-        <div className="row">
-            <div className='col-md-9'>
+    <div className="col-sm-4 login-form-2 m-1">
+        
+            <div>
                 <h3>
                 {categoria.nombre}
                 </h3>
                 
             </div>
-            <div className='col-md-3 '>
+            <div className="d-flex  justify-content-center">
                 <FaCircle style={{color: categoria.color, fontSize: "5em" }}/>
             </div>
 
@@ -25,8 +25,7 @@ export const CategoriaCard = ({categoria, getCategorias}) => {
 
         </div>
         
-                    
-    </div>
+
             
   )
 }
