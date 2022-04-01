@@ -200,5 +200,31 @@ ControladorSesion.getCategorias_x_sesion = async (req, res) => {
 }
 
 
+//@desc: obtiene sesiones de un usuario
+//@route: GET api/usuarios/sesiones_x_usuario
+ControladorSesion.usuarios_x_sesiones = async (req, res) => {
+    
+    const {codigo_sesion} =req.params;
+    console.log(req.params);
+    try{
+        
+        const [sesion_x_usuario] = await sequelize.query(`select u.nombre_usuario from usuario u left join usuarios_x_sesion uxs 
+                                                            on uxs.id_usuario = u.nombre_usuario where uxs.id_sesion = ${codigo_sesion}`)
+        res.json({message: sesion_x_usuario });
+
+    }catch(error){
+
+        console.log(error)
+        res.status(500).json({
+            ok: false,
+            msg: 'Error al obtener sesiones del usuario.'
+        })
+
+    }
+    
+}
+
+
+
 
 module.exports = ControladorSesion;

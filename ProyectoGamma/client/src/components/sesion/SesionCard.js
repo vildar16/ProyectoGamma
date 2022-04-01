@@ -12,6 +12,15 @@ export const SesionCard = ({ sesion, getSesiones }) => {
           <h3>
             {sesion.nombre_sesion}
           </h3>
+          
+        </div>
+        <div>
+          <center>
+          <h5>
+            código: {sesion.codigo_sesion}
+          </h5>
+
+          </center>
 
         </div>
         <div className="d-flex  justify-content-center">
