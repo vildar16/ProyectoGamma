@@ -147,4 +147,4 @@ ControladorSesion.getSesiones = async (req, res) => {
     
 }
 
-module.exports = ControladorSesiones;
+module.exports = ControladorSesion;
