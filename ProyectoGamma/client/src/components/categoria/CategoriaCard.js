@@ -1,6 +1,8 @@
 import React from 'react'
 import { FaCircle } from 'react-icons/fa';
 import './categoria.css'
+import { Globo } from './Globo';
+import { Moneda } from './Moneda';
 
 
 export const CategoriaCard = ({categoria, getCategorias}) => {
@@ -18,7 +20,11 @@ export const CategoriaCard = ({categoria, getCategorias}) => {
                 
             </div>
             <div className="d-flex  justify-content-center">
-                <FaCircle style={{color: categoria.color, fontSize: "5em" }}/>
+
+                
+                <Globo color={categoria.color}></Globo>
+                
+                
             </div>
 
 
