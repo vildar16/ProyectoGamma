@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { FaCircle } from 'react-icons/fa'
 import lottie from 'lottie-web';
-import moneda from '../../assets/moneda.json';
+import globo from '../../assets/globo.json';
 import { colorify, getColors } from 'lottie-colorify';
 
-export const Moneda = ({color}) => {
+export const Globo = ({color}) => {
 
 
   const container = useRef(null)
@@ -21,23 +21,23 @@ export const Moneda = ({color}) => {
       animationData: colorify([
        undefined, 
        color, 
-       undefined, //brillo
-       color, //sombra estrella
-       color, //sombra estrella
-       color, //sombra estrella
-       undefined, //brillo
-       color, //sombra estrella
-       undefined, //sombra estrella
-       color, //brillo
-       color, //sombra estrella
-       color, //sombra estrella
+       undefined, 
+       color, 
+       color, //sombra globo
+       "#000000", 
+       undefined, 
+       color, 
+       undefined, 
+       color, 
+       color, 
+       color, 
        
     
 
 
        
       ],
-       moneda),
+       globo),
 
     })
     

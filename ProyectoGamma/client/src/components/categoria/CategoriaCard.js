@@ -1,8 +1,8 @@
 import React from 'react'
 import { FaCircle } from 'react-icons/fa';
 import './categoria.css'
-import { Globo } from './Globo';
-import { Moneda } from './Moneda';
+import { Globo } from '../puntaje/Globo';
+import { Moneda } from '../puntaje/Moneda';
 
 
 export const CategoriaCard = ({categoria, getCategorias}) => {
@@ -11,7 +11,7 @@ export const CategoriaCard = ({categoria, getCategorias}) => {
 
 
   return (
-    <div className="col-sm-4 login-form-1 m-1">
+    <div className="col-sm-4 login-form-1 m-1" style={{height:'30vh', width:'50vh'}}>
         
             <div>
                 <h3>
@@ -19,10 +19,10 @@ export const CategoriaCard = ({categoria, getCategorias}) => {
                 </h3>
                 
             </div>
-            <div className="d-flex  justify-content-center">
+            <div className="d-flex  justify-content-center" style={{height:'15vh'}}>
 
                 
-                <Globo color={categoria.color}></Globo>
+                <Moneda color={categoria.color}></Moneda>
                 
                 
             </div>
