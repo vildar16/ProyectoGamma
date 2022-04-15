@@ -4,7 +4,7 @@ export const UsuarioCatFila = ({ categoria, monedas, globos }) => {
     return (
         <div className="row">
             <div className="w-100"></div>
-            <div className="col casilla">
+            <div className="col casilla categoria">
                 <h3>{categoria}</h3>
 
             </div>
