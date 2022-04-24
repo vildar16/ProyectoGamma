@@ -43,4 +43,4 @@ app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
 
-app.use('/api/usuarios', require('./routes/usuario'));
+
