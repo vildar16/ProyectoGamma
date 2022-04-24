@@ -13,9 +13,7 @@ export const UsuarioPerfil = () => {
         { usuario: 'Mauricio Munoz - 2018319153', categoria: 'Greedy', monedas: '16', globos: '3' },
         { usuario: 'Mauricio Munoz - 2018319153', categoria: 'Proba', monedas: '9', globos: '8' },
         { usuario: 'Mauricio Munoz - 2018319153', categoria: 'Categoriaxd', monedas: '25', globos: '0' },
-        { usuario: 'Mauricio Munoz - 2018319153', categoria: 'Categoriaxd', monedas: '25', globos: '0' },
-        { usuario: 'Mauricio Munoz - 2018319153', categoria: 'Categoriaxd', monedas: '25', globos: '0' },
-        { usuario: 'Mauricio Munoz - 2018319153', categoria: 'Categoriaxd', monedas: '25', globos: '0' },
+        
 
     ]
 

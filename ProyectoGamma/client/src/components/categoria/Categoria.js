@@ -4,6 +4,8 @@ import { CategoriaCard } from './CategoriaCard'
 import { CategoriaForm } from './CategoriaForm'
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import { Moneda } from '../puntaje/Moneda';
+import { Loading } from '../ui/Loading';
 
 export const Categoria = () => {
 
@@ -12,6 +14,8 @@ export const Categoria = () => {
   const [categorias, setCategorias] = useState([])
 
   const [{nombre_sesion}, setSesion] = useState({nombre_sesion: 'Cargando sesión...'})
+
+  const [creando, setCreando] = useState(false);
 
   const getCategorias = async () => {
    console.log(codigo_sesion)
@@ -46,7 +50,7 @@ export const Categoria = () => {
 
         <div className="col-md-4 m-4 div-main div-with-scroll" >
           <h1>Crear Categoría</h1>
-          <CategoriaForm getCategorias={getCategorias} sesion={codigo_sesion}></CategoriaForm>
+          <CategoriaForm getCategorias={getCategorias} sesion={codigo_sesion} setCreando={setCreando}></CategoriaForm>
 
         </div>
 
@@ -68,6 +72,34 @@ export const Categoria = () => {
 
 
               }
+
+
+              {
+                (creando)&&<div className="col-sm-4 login-form-1 m-1" style={{height:'30vh', width:'50vh'}}>
+        
+                <div>
+                    <h3>
+                    Creando...
+                    </h3>
+                    
+                </div>
+                <div className="d-flex  justify-content-center" style={{height:'15vh'}}>
+    
+                    
+                    <Loading></Loading>
+                    
+                    
+                </div>
+    
+    
+    
+            </div>
+
+
+
+
+              }
+
             </div>
           </ul>
 

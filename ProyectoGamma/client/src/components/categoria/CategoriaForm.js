@@ -5,7 +5,7 @@ import { rgbToHex } from '../utilidades/toHex';
 import { useForm } from '../../hooks/useForm';
 import axios from 'axios';
 
-export const CategoriaForm = ({ getCategorias, sesion}) => {
+export const CategoriaForm = ({ getCategorias, sesion, setCreando}) => {
 
     const [rgb, setColor] = useState({ r: '255', g: '159', b: '00' })
 
@@ -38,6 +38,7 @@ export const CategoriaForm = ({ getCategorias, sesion}) => {
         console.log(ok)
         
         if(ok){
+            setCreando(true)
             try {
                 const res = await axios.post('http://localhost:5000/api/categorias/crear',
                     {
@@ -48,7 +49,7 @@ export const CategoriaForm = ({ getCategorias, sesion}) => {
         
                 reset()
                 getCategorias()
-                
+                setCreando(false)
             } catch (error) {
                 console.log(error)
                 setValidation({ok: false, msg: error})
