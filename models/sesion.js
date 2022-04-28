@@ -1,7 +1,7 @@
 const Sequelize = require("sequelize");
 const sequelize = require("../db");
 
-module.exports = sequelize.define("sesion", {
+module.exports = sequelize.define("quest", {
 
   codigo_sesion: {
     type: Sequelize.INTEGER(11),

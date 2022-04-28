@@ -6,6 +6,7 @@ import { AuthContext } from '../../auth/authContext';
 import { useForm } from '../../hooks/useForm';
 import axios from 'axios'
 import validator from 'validator'
+import { Registro } from './Registro';
 
 export const Login = () => {
 
@@ -89,7 +90,7 @@ export const Login = () => {
                             <input 
                                 type="submit"
                                 className="btnSubmit"
-                                value="Login" 
+                                value="Iniciar Sesión" 
                             />
                         </div>
 

@@ -173,7 +173,7 @@ ControladorUsuario.ingresarSesion = async (req, res) => {
 
     try{
 
-        const sesion_x_usuario = await sequelize.query(`INSERT INTO usuarios_x_sesion (id_usuario, id_sesion) VALUES ("${nombre_usuario}", ${codigo_sesion})`)
+        const sesion_x_usuario = await sequelize.query(`INSERT INTO usuarios_x_quest (id_usuario, id_sesion) VALUES ("${nombre_usuario}", ${codigo_sesion})`)
         res.json({message: sesion_x_usuario });
 
     }catch(error){
@@ -198,7 +198,7 @@ ControladorUsuario.sesiones_x_usuario = async (req, res) => {
 
     try{
         
-        const [sesion_x_usuario] = await sequelize.query(`SELECT s.codigo_sesion, s.nombre_sesion FROM sesion s JOIN usuarios_x_sesion uxs on s.codigo_sesion = uxs.id_sesion WHERE uxs.id_usuario = "${nombre_usuario}"`)
+        const [sesion_x_usuario] = await sequelize.query(`SELECT s.codigo_sesion, s.nombre_sesion FROM quest s JOIN usuarios_x_quest uxs on s.codigo_sesion = uxs.id_sesion WHERE uxs.id_usuario = "${nombre_usuario}"`)
         res.json({message: sesion_x_usuario });
 
     }catch(error){
