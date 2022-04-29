@@ -1,5 +1,10 @@
+<<<<<<< Updated upstream:controllers/ControladorProblemaAsignado.js
 const ControladorProblemaAsignado = {};
 const ProblemaAsignado = require('../models/problemaAsignado');
+=======
+const ControladorProblemaInstancia = {};
+const ProblemaInstancia = require('../models/problemaAsignado');
+>>>>>>> Stashed changes:controllers/ControladorProblemaInstancia.js
 //require('dotenv').config();
 
 //@desc: permite crear una asignación a un problema
