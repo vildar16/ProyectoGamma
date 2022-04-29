@@ -6,11 +6,11 @@ const ProblemaAsignado = require('../models/problemaAsignado');
 //@route: POST api/asignaciones/crear/
 ControladorProblemaAsignado.crearProblemaUsuario = async (req, res) => {
     console.log(req.body);
-    const {id_usuario, id_problema_catalogo, id_metodo_resolucion} =req.body;
+    const {id_usuario, id_problema_catalogo} =req.body;
     
     try {
 
-        if(!id_usuario || !id_problema_catalogo || !id_metodo_resolucion){
+        if(!id_usuario || !id_problema_catalogo){
             res.status(400).json({
                 ok: false,
                 msg: 'Campos requeridos son nulos o no válidos.'
@@ -20,8 +20,7 @@ ControladorProblemaAsignado.crearProblemaUsuario = async (req, res) => {
         const asignacion = await ProblemaAsignado.create({
             resuelto: 0,
             id_usuario: id_usuario,
-            id_problema_catalogo: id_problema_catalogo,
-            id_metodo_resolucion: id_metodo_resolucion
+            id_problema_catalogo: id_problema_catalogo
         })
         
         res.status(200).json({
@@ -30,8 +29,7 @@ ControladorProblemaAsignado.crearProblemaUsuario = async (req, res) => {
             data: {
                 resuelto: asignacion.resuelto,
                 id_usuario: asignacion.id_usuario,
-                id_problema_catalogo: asignacion.id_problema_catalogo,
-                id_metodo_resolucion: asignacion.id_metodo_resolucion
+                id_problema_catalogo: asignacion.id_problema_catalogo
             }
         })
 
