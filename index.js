@@ -22,7 +22,7 @@ app.use('/api/usuarios', require('./routes/usuario'));
 app.use('/api/categorias', require('./routes/categoria'));
 app.use('/api/sesiones', require('./routes/sesiones'));
 app.use('/api/problemas', require('./routes/problemaCatalogo'));
-app.use('/api/instancias', require('./routes/problemaInstancia'));
+app.use('/api/asignaciones', require('./routes/problemaAsignado'));
 app.use('/api/metodos', require('./routes/metodoResolucion'));
 
 

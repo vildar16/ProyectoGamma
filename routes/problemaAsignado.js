@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const { crearProblemaUsuario, borrarProblemaUsuario, actualizarProblemaUsuario, getInstancias, getInstancia} = require('../controllers/ControladorProblemaInstancia');
+const { crearProblemaUsuario, borrarProblemaUsuario, actualizarProblemaUsuario, getAsignados, getAsignado} = require('../controllers/ControladorProblemaAsignado');
 
 router.route('/crear')
     .post(crearProblemaUsuario)
@@ -13,9 +13,9 @@ router.route('/actualizar')
     .put(actualizarProblemaUsuario)
 
 router.route('')
-    .get(getInstancias)
+    .get(getAsignados)
 
 router.route('/:id')
-    .get(getInstancia)
+    .get(getAsignado)
 
 module.exports = router;

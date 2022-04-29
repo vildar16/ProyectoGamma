@@ -1,9 +1,9 @@
 const Sequelize = require("sequelize");
 const sequelize = require("../db");
 
-module.exports = sequelize.define("problemaInstancia", {
+module.exports = sequelize.define("problema_asignado", {
 
-  id_problemaInstancia: {
+  id_problema_asignado: {
     type: Sequelize.INTEGER(11),
     autoIncrement: true,
     allowNull: false, 
