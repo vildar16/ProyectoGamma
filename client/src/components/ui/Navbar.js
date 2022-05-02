@@ -39,8 +39,18 @@ export const Navbar = () => {
                     className={({isActive}) => 'nav-item nav-link navbar-text' + (isActive ? 'active' : '')} 
                     to="/sesion"
                 >
-                    Sesión
+                    Sesiones
                 </NavLink>
+
+                <NavLink 
+                    
+                    className={({isActive}) => 'nav-item nav-link navbar-text' + (isActive ? 'active' : '')} 
+                    to="/metodo"
+                >
+                    Métodos de Resolución
+                </NavLink>
+
+
             </div>
         </div>}
             

@@ -1,7 +1,7 @@
 const Sequelize = require("sequelize");
 const sequelize = require("../db");
 
-module.exports = sequelize.define("metodoDeResolucion", {
+module.exports = sequelize.define("metodo_resolucion", {
 
   id_metodo_resolucion: {
     type: Sequelize.INTEGER(11),
