@@ -1,10 +1,13 @@
 const express = require('express');
 const router = express.Router();
 
-const { crearProblemaUsuario, borrarProblemaUsuario, actualizarProblemaUsuario, getAsignados, getAsignado} = require('../controllers/ControladorProblemaAsignado');
+const { crearProblemaUsuario, borrarProblemaUsuario, actualizarProblemaUsuario, getAsignados, getAsignado, asignarProblemasQuest} = require('../controllers/ControladorProblemaAsignado');
 
 router.route('/crear')
     .post(crearProblemaUsuario)
+
+router.route('/repartir')
+    .post(asignarProblemasQuest)
 
 router.route('/borrar')
     .delete(borrarProblemaUsuario)
