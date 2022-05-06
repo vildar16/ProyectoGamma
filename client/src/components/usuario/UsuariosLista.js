@@ -99,6 +99,19 @@ export const UsuariosLista = () => {
 
   }
 
+  const onUsersUpload = async (event) => {
+    event.preventDefault()
+
+    const res = await axios.post('http://localhost:5000/api/asignaciones/repartir/', 
+    {
+        codigo_sesion: codigo_sesion
+    });
+
+    console.log(res);
+
+  }
+
+
   return (
     <>
       <div className="input-group m-3 col-xs-4 col-sm-4 col-md-4 col-lg-4">
@@ -110,9 +123,12 @@ export const UsuariosLista = () => {
         <h1 className='m-4'>Jugadores en {nombre_sesion} </h1>
 
         <div className='m-4'>
-                <input type="file" accept='.csv' onChange={onFileChange}/>
+                <input type="file" placeholder="Subir usuarios por csv" accept='.csv' onChange={onFileChange}/>
                 <button onClick={onFileUpload}>
-                  Upload!
+                  Subir CSV
+                </button>
+                <button type="button" className="btn btn-outline-dark m-5" onClick={onUsersUpload}>
+                  Repartir Problemas
                 </button>
             </div>
 
