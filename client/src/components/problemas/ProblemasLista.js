@@ -10,8 +10,8 @@ export const ProblemasLista = ({ problemasLista }) => {
 
               problemasLista.map((problema) => (
               <ProblemasCard 
-                nombre={'asdasdasda'}
-                link={'https://www.google.com/'}
+                nombre={problema.nombre}
+                link={problema.link}
               />
             ))
 

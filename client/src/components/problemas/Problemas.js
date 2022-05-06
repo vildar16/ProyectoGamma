@@ -7,7 +7,7 @@ import { useParams } from 'react-router-dom'
 
 export const Problemas = ({ nombreCategoria }) => {
 
-  const problemas = [
+  const problemastest = [
     { a: "asdasda", b: "asdsadsadsa" },
     { a: "asdasda", b: "asdsadsadsa" },
     { a: "asdasda", b: "asdsadsadsa" },
@@ -21,6 +21,8 @@ export const Problemas = ({ nombreCategoria }) => {
   const { codigo_categoria } = useParams()
 
   const [categorias, setCategorias] = useState([])
+
+  const [problemas, setProblemas] = useState([])
 
   const [cargando, setCargando] = useState(true)
 
@@ -41,6 +43,13 @@ export const Problemas = ({ nombreCategoria }) => {
       .then(res => { setCategoria({ nombre_categoria: res.data.message[0].nombre }) })
       .catch(error => { setCategorias([]) })
     console.log(sesion)
+    setCargando(false);
+
+
+   const probs = await axios.get('http://localhost:5000/api/problemas/')
+      .then(res => { setProblemas(res.data.message) })
+      .catch(error => { setProblemas([]) })
+    console.log(probs)
     setCargando(false);
 
   }

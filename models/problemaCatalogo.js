@@ -1,7 +1,7 @@
 const Sequelize = require("sequelize");
 const sequelize = require("../db");
 
-module.exports = sequelize.define("problemaCatalogo", {
+module.exports = sequelize.define("problema_catalogo", {
 
   id_problema: {
     type: Sequelize.INTEGER(11),
