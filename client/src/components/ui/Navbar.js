@@ -50,6 +50,15 @@ export const Navbar = () => {
                     Métodos de Resolución
                 </NavLink>
 
+                <NavLink 
+                    
+                    className={({isActive}) => 'nav-item nav-link navbar-text' + (isActive ? 'active' : '')} 
+                    to="/categoria"
+                >
+                    Categorías
+                </NavLink>
+
+
 
             </div>
         </div>}

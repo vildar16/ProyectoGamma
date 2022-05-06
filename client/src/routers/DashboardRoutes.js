@@ -5,6 +5,7 @@ import { Metodo } from "../components/metodoResolucion/metodoResolucion";
 import Placeholder from "../components/Placeholder";
 import { Navbar } from "../components/ui/Navbar";
 import { UsuariosLista } from "../components/usuario/UsuariosLista";
+import { Problemas } from "../components/problemas/Problemas";
 
 export const DashboardRoutes = () => {
   return (
@@ -12,9 +13,10 @@ export const DashboardRoutes = () => {
         <Navbar />
         
         <Routes>
-            <Route path="categoria/:codigo_sesion" element={<Categoria />} />
+            <Route path="categoria" element={<Categoria />} />
             <Route path="sesion" element={<Sesion />} />
             <Route path="metodo" element={<Metodo />} />
+            <Route path="problemas/:codigo_categoria" element={<Problemas />} />
             <Route path="usuarios/:codigo_sesion" element={<UsuariosLista />} />
             <Route path="/" element={<Placeholder />} />
            

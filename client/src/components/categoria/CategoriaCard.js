@@ -27,6 +27,13 @@ export const CategoriaCard = ({ categoria, getCategorias }) => {
 
 
       </div>
+      <Link
+                    to={"/problemas/"+categoria.id_categoria}
+                    style={{textDecoration: "none"}}
+                    className="btnSubmit m-5">
+                    Ver Problemas
+
+      </Link>
     
 
 

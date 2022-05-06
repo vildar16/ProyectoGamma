@@ -1,5 +1,5 @@
 const ControladorProblemaCatalogo = {};
-const Problema = require('../models/problemaAsignado');
+const Problema = require('../models/problemaCatalogo');
 //require('dotenv').config();
 
 //@desc: permite crear un problema del catálogo

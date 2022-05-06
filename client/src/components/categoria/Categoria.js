@@ -24,7 +24,7 @@ export const Categoria = () => {
       .catch(error => { setCategorias([]) })
 
 
-    await axios.get('http://localhost:5000/api/sesiones/categorias_x_quest/'+codigo_sesion)
+    await axios.get('http://localhost:5000/api/categorias/')
       .then(res => { setCategorias(res.data.message) })
       .catch(error => { setCategorias([]) })
 
@@ -43,7 +43,7 @@ export const Categoria = () => {
     <>
       <div className="input-group m-3 col-xs-4 col-sm-4 col-md-4 col-lg-4">
 
-        <h1>{nombre_sesion}</h1>
+       
       </div>
 
       <div className="row">

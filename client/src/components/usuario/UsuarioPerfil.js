@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { Globo } from '../puntaje/Globo'
 import { Moneda } from '../puntaje/Moneda'
 import { UsuarioCatFila } from './UsuarioCatFila'
@@ -22,6 +23,14 @@ export const UsuarioPerfil = () => {
         <>
             <div className="login-form-1 m-1 div-gen perfil div-with-scroll" id='left'>
                 <h1>Mauricio Munoz - 2018319153</h1>
+                
+                <Link
+                    to={"/"}
+                    style={{textDecoration: "none"}}
+                    className="btnSubmit m-3">
+                    Ver Problemas
+
+                </Link>
                 <div className="row">
                     <div className="col casilla header header-left d-flex align-items-center">
                         <h2>

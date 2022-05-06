@@ -1,7 +1,26 @@
 import React from 'react'
-
-export const ProblemasLista = () => {
+import { ProblemasCard } from './ProblemasCard'
+export const ProblemasLista = ({ problemasLista }) => {
   return (
-    <div>ProblemasLista</div>
+    <div>
+        
+    
+        <ul className='list-group list-group-flush'>
+          {
+
+              problemasLista.map((problema) => (
+              <ProblemasCard 
+                nombre={'asdasdasda'}
+                link={'https://www.google.com/'}
+              />
+            ))
+
+
+          }
+  </ul>
+  </div>
+
+
+    
   )
 }

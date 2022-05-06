@@ -153,14 +153,14 @@ ControladorCategoria.getCategorias = async (req, res) => {
 //@desc: Obtener una categoría
 //@route: GET api/categorias/:id
 ControladorCategoria.getCategoria = async (req, res) => {
-    console.log(req.body);
-    const {id_categoria} =req.body;
+    console.log(req.params);
+    const {id} =req.params;
 
     try{
 
         const categoria = await Categoria.findAll({
             where: {
-                id_categoria: id_categoria
+                id_categoria: id
             }
         })
         res.json({message: categoria });

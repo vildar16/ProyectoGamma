@@ -1,7 +1,73 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { CategoriaForm } from '../categoria/CategoriaForm'
+import { ProblemasForm } from './ProblemasForm'
+import { ProblemasLista } from './ProblemasLista'
+import axios from 'axios'
+import { useParams } from 'react-router-dom'
 
-export const Problemas = () => {
+export const Problemas = ({ nombreCategoria }) => {
+
+  const problemas = [
+    { a: "asdasda", b: "asdsadsadsa" },
+    { a: "asdasda", b: "asdsadsadsa" },
+    { a: "asdasda", b: "asdsadsadsa" },
+    { a: "asdasda", b: "asdsadsadsa" },
+    { a: "asdasda", b: "asdsadsadsa" },
+    { a: "asdasda", b: "asdsadsadsa" },
+
+
+  ]
+
+  const { codigo_categoria } = useParams()
+
+  const [categorias, setCategorias] = useState([])
+
+  const [cargando, setCargando] = useState(true)
+
+  const [{ nombre_categoria }, setCategoria] = useState({ nombre_categoria: 'Cargando...' })
+
+  
+
+  useEffect(() => {
+    getCategorias()
+  }, [])
+  
+
+  const getCategorias = async () => {
+    console.log("asdsad")
+    console.log(codigo_categoria)
+    
+    const sesion = await axios.get('http://localhost:5000/api/categorias/' + codigo_categoria)
+      .then(res => { setCategoria({ nombre_categoria: res.data.message[0].nombre }) })
+      .catch(error => { setCategorias([]) })
+    console.log(sesion)
+    setCargando(false);
+
+  }
+
+
   return (
-    <div>Problemas</div>
+
+    <>
+
+      <div className="row">
+
+        
+      <div className="col-md-3 m-4 div-main div-with-scroll" >
+          <h1>Problemas de {nombre_categoria}</h1>
+          <ProblemasForm></ProblemasForm>
+
+        </div>
+
+
+      <div className="col-md-7 div-main" >
+        <h1>Problemas</h1>
+        <ProblemasLista
+          problemasLista={problemas}
+        ></ProblemasLista>
+        </div>
+      </div>
+    </>
+
   )
 }
