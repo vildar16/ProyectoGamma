@@ -201,7 +201,7 @@ ControladorSesion.getCategorias_x_quest = async (req, res) => {
 
 
 //@desc: obtiene sesiones de un usuario
-//@route: GET api/sesiones/usuarios_x_quest
+//@route: GET api/sesiones/usuarios_x_sesion/:codigo_sesion
 ControladorSesion.usuarios_x_quest = async (req, res) => {
     
     const {codigo_quest} =req.params;
@@ -211,6 +211,46 @@ ControladorSesion.usuarios_x_quest = async (req, res) => {
         const [sesion_x_usuario] = await sequelize.query(`select * from usuario u left join usuarios_x_quest uxs 
                                                             on uxs.id_usuario = u.nombre_usuario where uxs.id_sesion = ${codigo_quest}`)
         res.json({message: sesion_x_usuario });
+
+    }catch(error){
+
+        console.log(error)
+        res.status(500).json({
+            ok: false,
+            msg: 'Error al obtener sesiones del usuario.'
+        })
+
+    }
+    
+}
+
+
+
+//@desc: obtiene los problemas y categorias de un usuario con respecto a su sesion
+//@route: GET api/sesiones/problemas_usuario_sesion
+ControladorSesion.problemasUsuarioSesion = async (req, res) => {
+
+    const {nombre_usuario, codigo_sesion} =req.body;
+    console.log(req.body);
+    try{
+        
+        if(!nombre_usuario || !codigo_sesion){
+            res.status(400).json({
+                ok: false,
+                msg: 'Campos requeridos son nulos o no válidos.'
+            })
+        }
+
+        const [problemas_usuario] = await sequelize.query(`SELECT p.id_problema, p.nombre, c.id_categoria, c.nombre, pa.resuelto, pa.codigo_fuente, pa.analisis 
+                                                            FROM problema_catalogo p 
+                                                            INNER JOIN problema_asignado pa ON p.id_problema = pa.id_problema_catalogo
+                                                            INNER JOIN problema_x_categoria pxc ON p.id_problema = pxc.id_problema
+                                                            INNER JOIN categoria c ON pxc.id_categoria = c.id_categoria
+                                                            INNER JOIN usuario u ON pa.id_usuario = u.nombre_usuario
+                                                            INNER JOIN usuarios_x_quest uxq ON u.nombre_usuario = uxq.id_usuario
+                                                            WHERE u.nombre_usuario = '${nombre_usuario}' AND uxq.id_sesion = ${codigo_sesion}
+                                                            ORDER BY c.id_categoria`)
+        res.json({message: problemas_usuario });
 
     }catch(error){
 
