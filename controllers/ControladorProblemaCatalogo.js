@@ -131,18 +131,18 @@ ControladorProblemaCatalogo.actualizarProblema = async (req, res) => {
 //@desc: Obtener todos los problemas de una categoría
 //@route: GET api/problemas/problemascategoria/
 ControladorProblemaCatalogo.getProblemasCategoria = async (req, res) => {
-    console.log(req.body);
-    const {id_categoria} =req.body;
+    console.log(req.params);
+    const {id} =req.params;
     try{
 
-        if(!id_categoria){
+        if(!id){
             res.status(400).json({
                 ok: false,
                 msg: 'Campos requeridos son nulos o no válidos.'
             })
         }
 
-        const problemas = await sequelize.query(`SELECT pxc.id_categoria, pg.nombre, pg.link FROM problema_x_categoria pxc JOIN problema_catalogo pg ON pxc.id_problema = pg.id_problema WHERE id_categoria = "${id_categoria}"`)
+        const problemas = await sequelize.query(`SELECT pxc.id_categoria, pg.nombre, pg.link FROM problema_x_categoria pxc JOIN problema_catalogo pg ON pxc.id_problema = pg.id_problema WHERE id_categoria = "${id}"`)
         res.json({message: problemas });
 
     }catch(error){

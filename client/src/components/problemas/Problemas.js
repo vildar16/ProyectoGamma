@@ -46,8 +46,8 @@ export const Problemas = ({ nombreCategoria }) => {
     setCargando(false);
 
 
-   const probs = await axios.get('http://localhost:5000/api/problemas/')
-      .then(res => { setProblemas(res.data.message) })
+   const probs = await axios.get('http://localhost:5000/api/problemas/problemascategoria/'+codigo_categoria)
+      .then(res => { setProblemas(res.data.message[0]) })
       .catch(error => { setProblemas([]) })
     console.log(probs)
     setCargando(false);
@@ -64,7 +64,7 @@ export const Problemas = ({ nombreCategoria }) => {
         
       <div className="col-md-3 m-4 div-main div-with-scroll" >
           <h1>Problemas de {nombre_categoria}</h1>
-          <ProblemasForm getProblemas={getProblemas}></ProblemasForm>
+          <ProblemasForm getProblemas={getProblemas} id_categoria={codigo_categoria}></ProblemasForm>
 
         </div>
 

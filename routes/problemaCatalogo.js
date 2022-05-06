@@ -12,7 +12,7 @@ router.route('/borrar')
 router.route('/actualizar')
     .put(actualizarProblema)
 
-router.route('/problemascategoria')
+router.route('/problemascategoria/:id')
     .get(getProblemasCategoria)
 
 router.route('')

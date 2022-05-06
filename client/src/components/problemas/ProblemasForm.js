@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useForm } from '../../hooks/useForm';
 import axios from 'axios';
 
-export const ProblemasForm = ({getProblemas}) => {
+export const ProblemasForm = ({getProblemas, id_categoria}) => {
 
     const [{ok, msg}, setValidation] = useState({ok: true, msg: ''})
 
@@ -37,7 +37,8 @@ export const ProblemasForm = ({getProblemas}) => {
                 const res = await axios.post('http://localhost:5000/api/problemas/crear',
                     {
                         nombre: nombre,
-                        link: link
+                        link: link,
+                        id_categoria: id_categoria
                     });
                 reset();
                 getProblemas();
