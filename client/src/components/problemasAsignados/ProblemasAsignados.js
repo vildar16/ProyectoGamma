@@ -6,40 +6,48 @@ import { ProblemasLista } from '../problemas/ProblemasLista'
 
 export const ProblemasAsignados = () => {
 
-    const [problemas, setProblemas] = useState([])
-    const { usuario } = useContext(AuthContext)
-    const { codigo_sesion } = useParams()
-    
-    
+  const [problemas, setProblemas] = useState([])
+  const { usuario } = useContext(AuthContext)
+  const { codigo_sesion } = useParams()
 
-    useEffect(() => {
-        getProblemas()
-        console.log(usuario.nombre_usuario)
-      }, [])
-      
-    
-      const getProblemas = async () => {
-    
-    
-       const probs = await axios.post('http://localhost:5000/api/sesiones/problemas_usuario_sesion', 
-       {
+
+
+  useEffect(() => {
+    getProblemas()
+    console.log(usuario.nombre_usuario)
+  }, [])
+
+
+  const getProblemas = async () => {
+
+
+    const probs = await axios.post('http://localhost:5000/api/sesiones/problemas_usuario_sesion',
+      {
         nombre_usuario: usuario.nombre_usuario,
         codigo_sesion: codigo_sesion
-       }
-      )
-          .then(res => { setProblemas(res.data.message) })
-          .catch(error => { setProblemas([]); console.log("error") })
-       
-    
       }
+    )
+      .then(res => { setProblemas(res.data.message) })
+      .catch(error => { setProblemas([]); console.log("error") })
+
+
+  }
 
 
   return (
-    <div>
+    <div className='row'>
+      <h1>Mis Problemas</h1>
+      <div className="col-md-2 "></div>
 
-        <h1>Mis Problemas</h1>
-
+      <div className="col-md-8 ">
         <ProblemasLista problemasLista={problemas}></ProblemasLista>
+      </div>
+
+
+      <div className="col-md-2 "></div>
+
+
+
     </div>
   )
 }

@@ -252,7 +252,8 @@ ControladorSesion.problemasUsuarioSesion = async (req, res) => {
                                                                     c.nombre as  'categoria', 
                                                                     p.link,
                                                                     pa.resuelto, 
-                                                                    pa.codigo_fuente, pa.analisis 
+                                                                    pa.codigo_fuente, pa.analisis,
+                                                                    pa.id_problema_asignado
                                                             FROM problema_catalogo p 
                                                             INNER JOIN problema_asignado pa ON p.id_problema = pa.id_problema_catalogo
                                                             INNER JOIN problema_x_categoria pxc ON p.id_problema = pxc.id_problema

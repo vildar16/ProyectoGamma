@@ -12,6 +12,7 @@ export const ProblemasLista = ({ problemasLista }) => {
               <ProblemasCard 
                 nombre={problema.nombre}
                 link={problema.link}
+                id_problema_asignado={problema.id_problema_asignado}
               />
             ))
 

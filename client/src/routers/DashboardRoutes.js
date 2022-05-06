@@ -20,7 +20,7 @@ export const DashboardRoutes = () => {
             <Route path="metodo" element={<Metodo />} />
             <Route path="problemas/:codigo_categoria" element={<Problemas />} />
             <Route path="usuarios/:codigo_sesion" element={<UsuariosLista />} />
-            <Route path="codigoFuente" element={<CodigoFuente />} />
+            <Route path="codigoFuente/:codigo_problema_asignado" element={<CodigoFuente />} />
             <Route path="problemasAsignados/:codigo_sesion" element={<ProblemasAsignados />} />
             <Route path="/" element={<Placeholder />} />
            
