@@ -1,16 +1,17 @@
 const ControladorProblemaCatalogo = {};
 const Problema = require('../models/problemaCatalogo');
+const ProblemaXCategoria = require('../models/problemasPorCategoria');
 //require('dotenv').config();
 
 //@desc: permite crear un problema del catálogo
 //@route: POST api/problemas/crear/
 ControladorProblemaCatalogo.crearProblema = async (req, res) => {
     console.log(req.body);
-    const {id_problema, nombre, link} =req.body;
+    const {nombre, link, id_categoria} =req.body;
     
     try {
 
-        if(!id_problema || !nombre || !link){
+        if(!nombre || !link || !id_categoria){
             res.status(400).json({
                 ok: false,
                 msg: 'Campos requeridos son nulos o no válidos.'
@@ -18,10 +19,11 @@ ControladorProblemaCatalogo.crearProblema = async (req, res) => {
         }
         
         const problema = await Problema.create({
-            id_problema: id_problema,
             nombre: nombre,
             link: link
         })
+
+        const prob_x_cat = await setProblemaxCategoria(problema.id_problema, id_categoria)
         
         res.status(200).json({
             ok: true,
@@ -88,11 +90,11 @@ ControladorProblemaCatalogo.borrarProblema = async (req, res) => {
 //@route: PUT api/problemas/actualizar/
 ControladorProblemaCatalogo.actualizarProblema = async (req, res) => {
     console.log(req.body);
-    const {id_problema, nombre, link} =req.body;
+    const {nombre, link} =req.body;
     
     try {
 
-        if(!id_problema || !nombre || !link){
+        if(!nombre || !link){
             res.status(400).json({
                 ok: false,
                 msg: 'Campos requeridos son nulos o no válidos.'
@@ -122,6 +124,37 @@ ControladorProblemaCatalogo.actualizarProblema = async (req, res) => {
         })
         
     }    
+}
+
+
+
+//@desc: Obtener todos los problemas de una categoría
+//@route: GET api/problemas/problemascategoria/
+ControladorProblemaCatalogo.getProblemasCategoria = async (req, res) => {
+    console.log(req.body);
+    const {id_categoria} =req.body;
+    try{
+
+        if(!id_categoria){
+            res.status(400).json({
+                ok: false,
+                msg: 'Campos requeridos son nulos o no válidos.'
+            })
+        }
+
+        const problemas = await sequelize.query(`SELECT pxc.id_categoria, pg.nombre, pg.link FROM problema_x_categoria pxc JOIN problema_catalogo pg ON pxc.id_problema = pg.id_problema WHERE id_categoria = "${id_categoria}"`)
+        res.json({message: problemas });
+
+    }catch(error){
+
+        console.log(error)
+        res.status(500).json({
+            ok: false,
+            msg: 'Error al obtener los problemas.'
+        })
+
+    }
+    
 }
 
 
@@ -173,6 +206,25 @@ ControladorProblemaCatalogo.getProblema = async (req, res) => {
             ok: false,
             msg: 'Error al obtener el problema.'
         })
+
+    }
+    
+}
+
+
+
+const setProblemaxCategoria = async (id_problema, id_categoria) => {
+
+    try{
+
+        const problema_x_categoria = await sequelize.query(`INSERT INTO problema_x_categoria (id_problema, id_categoria) VALUES (${id_problema}, ${id_categoria})`)
+
+        return problema_x_categoria
+
+    }catch(error){
+
+        console.log(error)
+        return 'Error al asignar problema y categoría.'
 
     }
     

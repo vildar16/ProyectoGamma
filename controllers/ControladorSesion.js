@@ -226,5 +226,32 @@ ControladorSesion.usuarios_x_quest = async (req, res) => {
 
 
 
+/*ControladorSesion.setUsuariosCSV = async (req, res) => {
+    
+    const {codigo_sesion, path} =req.params;
+    console.log(req.params);
+    try{
+        
+        const fs = require("fs");
+        const data = fs.readFile(path, "utf-8");
+        const [sesion_x_usuario] = await sequelize.query(`select u.nombre_usuario from usuario u left join usuarios_x_quest uxs 
+                                                            on uxs.id_usuario = u.nombre_usuario where uxs.id_sesion = ${codigo_sesion}`)
+
+        res.status(200).json({
+            ok: true,
+            msg: `Correcto.`,
+        })
+
+    }catch(error){
+
+        console.log(error)
+        res.status(500).json({
+            ok: false,
+            msg: 'Error al obtener sesiones del usuario.'
+        })
+
+    }
+    
+}*/
 
 module.exports = ControladorSesion;
