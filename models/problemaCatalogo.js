@@ -5,6 +5,7 @@ module.exports = sequelize.define("problema_catalogo", {
 
   id_problema: {
     type: Sequelize.INTEGER(11),
+    autoIncrement: true,
     allowNull: false, 
     primaryKey: true
   },

@@ -31,11 +31,11 @@ export const Problemas = ({ nombreCategoria }) => {
   
 
   useEffect(() => {
-    getCategorias()
+    getProblemas()
   }, [])
   
 
-  const getCategorias = async () => {
+  const getProblemas = async () => {
     console.log("asdsad")
     console.log(codigo_categoria)
     
@@ -64,7 +64,7 @@ export const Problemas = ({ nombreCategoria }) => {
         
       <div className="col-md-3 m-4 div-main div-with-scroll" >
           <h1>Problemas de {nombre_categoria}</h1>
-          <ProblemasForm></ProblemasForm>
+          <ProblemasForm getProblemas={getProblemas}></ProblemasForm>
 
         </div>
 
