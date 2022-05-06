@@ -21,12 +21,13 @@ export const UsuariosLista = () => {
 
   const [{ nombre_sesion }, setSesion] = useState({ nombre_sesion: 'Cargando...' })
 
+  const [problemas, setProblemas] = useState([])
+
   useEffect(() => {
 
     getUsuarios()
 
   }, [])
-
 
   const usuarios1 = [{ usuario: 'Mauricio Munoz - 2018319153' },
   { usuario: 'Mauricio Munoz - 2018319153' },
@@ -55,11 +56,25 @@ export const UsuariosLista = () => {
       const users = await axios.get('http://localhost:5000/api/sesiones/usuarios_x_quest/' + codigo_sesion)
       .then(res => { setUsuarios(res.data.message) })
       .catch(error => { setUsuarios([]) })
-    console.log(usuarios)
+      
     setCargando(false);
 
   }
+  
+  const getProblemas = async (viendoU) => {
+   await console.log('viendo '+viendo +""+ codigo_sesion) 
 
+  
+   const probs = await axios.post('http://localhost:5000/api/sesiones/problemas_usuario_sesion', 
+    {
+     nombre_usuario: viendoU,
+     codigo_sesion: codigo_sesion
+    }
+   )
+       .then(res => { setProblemas(res.data.message) })
+       .catch(error => { setProblemas([]); console.log("error") })
+    
+   }
   const [file, setFile] = useState()
 
   const onFileChange = async (event) => {
@@ -103,11 +118,11 @@ export const UsuariosLista = () => {
 
         <div className="col-md-5 m-4 div-main div-with-scroll" id='left'>
 
-          <ul class="list-group list-group-flush">
+          <ul className="list-group list-group-flush">
             {
               usuarios.map((usuario) => (
 
-                <UsuarioCard usuario={usuario} setViendo={setViendo} ></UsuarioCard>
+                <UsuarioCard usuario={usuario} setViendo={setViendo} getProblemas = {getProblemas}></UsuarioCard>
 
               ))
 
@@ -117,11 +132,11 @@ export const UsuariosLista = () => {
           </ul>
         </div>
 
-        <div className="col-md-5 div-main m-4 ">
-          <UsuarioPerfil viendo={viendo} viendoNombre={viendoNombre} ></UsuarioPerfil>
+        {(!viendo=="")&&<div className="col-md-5 div-main m-4 ">
+          <UsuarioPerfil viendo={viendo} viendoNombre={viendoNombre} problemas={problemas}></UsuarioPerfil>
 
 
-        </div>
+        </div>}
       </div>
 
 

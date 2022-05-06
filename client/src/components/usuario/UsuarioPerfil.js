@@ -5,7 +5,7 @@ import { Globo } from '../puntaje/Globo'
 import { Moneda } from '../puntaje/Moneda'
 import { UsuarioCatFila } from './UsuarioCatFila'
 
-export const UsuarioPerfil = ({ viendo, viendoNombre}) => {
+export const UsuarioPerfil = ({ viendo, viendoNombre, problemas}) => {
 
     const [viendoProblemas, setViendoProblemas] = useState(false)
 
@@ -62,7 +62,7 @@ export const UsuarioPerfil = ({ viendo, viendoNombre}) => {
 
                 </div>
 
-                <ProblemasLista problemasLista={[{ a: "b", a: "b" }, { a: "b", a: "b" }]}></ProblemasLista>
+                <ProblemasLista problemasLista={problemas}></ProblemasLista>
 
 
 

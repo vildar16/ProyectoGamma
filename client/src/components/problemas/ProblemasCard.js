@@ -17,7 +17,7 @@ export const ProblemasCard = ({nombre, link}) => {
           
 
           <a href={link} rel="noreferrer" target="_blank" className="btnSubmit m-5">
-            Ir al problema
+            Ver
           </a>
 
           </div>

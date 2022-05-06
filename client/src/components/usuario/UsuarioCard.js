@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { Moneda } from '../puntaje/Moneda'
 import { BsFillEyeFill } from 'react-icons/bs';
 
-export const UsuarioCard = ({ usuario, setViendo, setVerProblemas, verProblemas }) => {
+export const UsuarioCard = ({ usuario, setViendo, setVerProblemas, verProblemas, getProblemas }) => {
 
 
 
@@ -14,9 +14,10 @@ export const UsuarioCard = ({ usuario, setViendo, setVerProblemas, verProblemas 
 
 
   const handleVer = async () => {
-    setViendo({viendo:usuario.nombre_usuario, viendoNombre:usuario.nombre + " " + usuario.apellido1 + " " + usuario.apellido2 })
-    await setVerProblemas(!verProblemas);
-    console.log(verProblemas)
+    await setViendo({viendo:usuario.nombre_usuario, viendoNombre:usuario.nombre + " " + usuario.apellido1 + " " + usuario.apellido2 })
+    await getProblemas(usuario.nombre_usuario)
+    //await setVerProblemas(!verProblemas);
+    //console.log(verProblemas)
 
   }
 
