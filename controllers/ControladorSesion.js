@@ -259,7 +259,7 @@ ControladorSesion.problemasUsuarioSesion = async (req, res) => {
                                                             INNER JOIN categoria c ON pxc.id_categoria = c.id_categoria
                                                             INNER JOIN usuario u ON pa.id_usuario = u.nombre_usuario
                                                             INNER JOIN usuarios_x_quest uxq ON u.nombre_usuario = uxq.id_usuario
-                                                            WHERE u.nombre_usuario = '${nombre_usuario}' AND uxq.id_sesion = ${codigo_sesion}
+                                                            WHERE u.nombre_usuario = '${nombre_usuario}' AND uxq.id_sesion = ${codigo_sesion} AND pa.codigo_quest = ${codigo_sesion}
                                                             ORDER BY c.id_categoria`)
         res.json({message: problemas_usuario });
 
