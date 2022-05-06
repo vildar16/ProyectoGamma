@@ -10,13 +10,7 @@ export const SesionCard = ({ sesion, getSesiones }) => {
     <div className="col-md-4 login-form-1 m-1">
 
       <center>
-        <Link
-          to={"/categoria/" + sesion.codigo_sesion}
-          style={{textDecoration: "none"}}
-          className="btnSubmit m-3">
-          Categorías
-
-        </Link>
+        
         <Link
           to={"/usuarios/" + sesion.codigo_sesion}
           style={{textDecoration: "none"}}
