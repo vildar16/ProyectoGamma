@@ -319,10 +319,9 @@ async function leerArchivo(filePath, codigo_quest) {
     .then(users => {
         console.log(users);
         users.forEach(async element => {
-            const usuarios_quest = await UsuariosXQuest.create({
-                id_usuario: element.nombre_usuario,
-                id_sesion: codigo_quest
-            })
+            await sequelize.query('CALL insertUsuariosQuest (:id_usuario, :id_sesion)',
+                                {replacements: {id_usuario: element.nombre_usuario, id_sesion: codigo_quest}})
+                
         });
 
     }).catch(err => {
