@@ -6,7 +6,7 @@ const { crearSesion, borrarSesion, actualizarSesion, getSesiones, getSesion, get
 router.route('/crear')
     .post(crearSesion)
 
-router.route('/csv-usuarios')
+router.route('/csv-usuarios/:codigo_quest')
     .post(setUsuariosCSV)
 
 router.route('/borrar')
@@ -16,7 +16,7 @@ router.route('/actualizar')
     .put(actualizarSesion)
 
 router.route('/problemas_usuario_sesion')
-    .get(problemasUsuarioSesion)
+    .post(problemasUsuarioSesion)
 
 router.route('')
     .get(getSesiones)

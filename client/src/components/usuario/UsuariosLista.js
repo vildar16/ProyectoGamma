@@ -9,8 +9,6 @@ import axios from 'axios'
 
 export const UsuariosLista = () => {
 
-  
-
   const { codigo_sesion } = useParams()
 
   const [categorias, setCategorias] = useState([])
@@ -62,6 +60,29 @@ export const UsuariosLista = () => {
 
   }
 
+  const [file, setFile] = useState()
+
+  const onFileChange = async (event) => {
+    setFile(event.target.files[0])
+  }
+
+  const onFileUpload = async (event) => {
+    event.preventDefault()
+
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('fileName', file.name);
+    const config = {
+      headers: {
+        'content-type': 'multipart/form-data',
+      },
+      preservePath: true
+    };
+    const res = await axios.post('http://localhost:5000/api/sesiones/csv-usuarios/' + codigo_sesion, formData, config)
+
+    console.log(res);
+
+  }
 
   return (
     <>
@@ -72,6 +93,14 @@ export const UsuariosLista = () => {
 
 
         <h1>Jugadores en {nombre_sesion} </h1>
+
+        <div>
+                <input type="file" accept='.csv' onChange={onFileChange}/>
+                <button onClick={onFileUpload}>
+                  Upload!
+                </button>
+            </div>
+
         <div className="col-md-5 m-4 div-main div-with-scroll" id='left'>
 
           <ul class="list-group list-group-flush">

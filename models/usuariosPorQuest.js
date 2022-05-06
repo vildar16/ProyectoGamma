@@ -9,7 +9,7 @@ module.exports = sequelize.define("usuarios_x_quest", {
     primaryKey: true
   },
   
-  id_categoria: {
+  id_sesion: {
     type: Sequelize.INTEGER(11),
     allowNull: false, 
     primaryKey: true

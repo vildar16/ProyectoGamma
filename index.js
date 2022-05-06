@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
+let busboy = require('connect-busboy');
 require("./db");
 
 const port = process.env.PORT || 5000;
@@ -15,6 +16,7 @@ app.use((req, res, next) => {
 
 app.use(express.json());
 app.use(bodyParser.json());
+app.use(busboy());
 
 
 //Rutas

@@ -1,6 +1,11 @@
 const ControladorSesion = {};
 const sequelize = require('../db');
 const Sesion = require('../models/sesion');
+const UsuariosXQuest = require('../models/usuariosPorQuest');
+const busboy = require('connect-busboy');
+const fs = require('fs');
+const CSVToJSON = require('csvtojson');
+
 //require('dotenv').config();
 
 //@desc: permite crear una sesión
@@ -241,7 +246,13 @@ ControladorSesion.problemasUsuarioSesion = async (req, res) => {
             })
         }
 
-        const [problemas_usuario] = await sequelize.query(`SELECT p.id_problema, p.nombre, c.id_categoria, c.nombre, pa.resuelto, pa.codigo_fuente, pa.analisis 
+        const [problemas_usuario] = await sequelize.query(`SELECT p.id_problema as id_problema_catalogo,
+                                                                    p.nombre as 'nombre',
+                                                                    c.id_categoria, 
+                                                                    c.nombre as  'categoria', 
+                                                                    p.link,
+                                                                    pa.resuelto, 
+                                                                    pa.codigo_fuente, pa.analisis 
                                                             FROM problema_catalogo p 
                                                             INNER JOIN problema_asignado pa ON p.id_problema = pa.id_problema_catalogo
                                                             INNER JOIN problema_x_categoria pxc ON p.id_problema = pxc.id_problema
@@ -267,21 +278,28 @@ ControladorSesion.problemasUsuarioSesion = async (req, res) => {
 
 
 //@desc: agrega usuarios a una sesion por medio de un csv
-//@route: GET api/sesiones/csv-usuarios
+//@route: GET api/sesiones/csv-usuarios/:codigo_quest
 ControladorSesion.setUsuariosCSV = async (req, res) => {
     
-    const {codigo_sesion, path} =req.params;
-    console.log(req.params);
-    try{
-        
-        const fs = require("fs");
-        const data = fs.readFile(path, "utf-8");
-        //const [sesion_x_usuario] = await sequelize.query(`select u.nombre_usuario from usuario u left join usuarios_x_quest uxs 
-        //                                                    on uxs.id_usuario = u.nombre_usuario where uxs.id_sesion = ${codigo_sesion}`)
+    try {
+        const {codigo_quest} =req.params;
+        var filePath = '';
+        req.busboy.on('file', async function (fieldname, file, filename) {
+            console.log("received file")
+            filePath = './csv/' + filename.filename;
+            var fstream = fs.createWriteStream(filePath);
+            file.pipe(fstream);
+            fstream.on('close', async function () {
+                console.log("upload succeeded!")
+                fstream.end()
+                await leerArchivo(filePath, codigo_quest);
+            });
+        });
+        req.pipe(req.busboy);
 
-        res.status(200).json({
+        res.status(500).json({
             ok: true,
-            msg: `Correcto.`,
+            msg: 'Usuarios agregados correctamente al quest.'
         })
 
     }catch(error){
@@ -289,11 +307,28 @@ ControladorSesion.setUsuariosCSV = async (req, res) => {
         console.log(error)
         res.status(500).json({
             ok: false,
-            msg: 'Error al obtener sesiones del usuario.'
+            msg: 'Error al ingresar usuarios por medio de csv.'
         })
 
     }
     
+}
+
+async function leerArchivo(filePath, codigo_quest) {
+    CSVToJSON().fromFile(filePath)
+    .then(users => {
+        console.log(users);
+        users.forEach(async element => {
+            const usuarios_quest = await UsuariosXQuest.create({
+                id_usuario: element.nombre_usuario,
+                id_sesion: codigo_quest
+            })
+        });
+
+    }).catch(err => {
+        console.log(err);
+    });
+
 }
 
 module.exports = ControladorSesion;
