@@ -1,12 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { ProblemasLista } from '../problemas/ProblemasLista'
 import { Globo } from '../puntaje/Globo'
 import { Moneda } from '../puntaje/Moneda'
 import { UsuarioCatFila } from './UsuarioCatFila'
 
-export const UsuarioPerfil = () => {
+export const UsuarioPerfil = ({ viendo, viendoNombre}) => {
 
-
+    const [viendoProblemas, setViendoProblemas] = useState(false)
 
 
     const usuarios = [
@@ -14,7 +15,7 @@ export const UsuarioPerfil = () => {
         { usuario: 'Mauricio Munoz - 2018319153', categoria: 'Greedy', monedas: '16', globos: '3' },
         { usuario: 'Mauricio Munoz - 2018319153', categoria: 'Proba', monedas: '9', globos: '8' },
         { usuario: 'Mauricio Munoz - 2018319153', categoria: 'Categoriaxd', monedas: '25', globos: '0' },
-        
+
 
     ]
 
@@ -22,15 +23,9 @@ export const UsuarioPerfil = () => {
     return (
         <>
             <div className="login-form-1 m-1 div-gen perfil div-with-scroll" id='left'>
-                <h1>Mauricio Munoz - 2018319153</h1>
-                
-                <Link
-                    to={"/"}
-                    style={{textDecoration: "none"}}
-                    className="btnSubmit m-3">
-                    Ver Problemas
+                <h1>{viendoNombre}</h1>
 
-                </Link>
+
                 <div className="row">
                     <div className="col casilla header header-left d-flex align-items-center">
                         <h2>
@@ -42,7 +37,7 @@ export const UsuarioPerfil = () => {
                     <div className="col casilla header">
                         <Moneda color={'#ED25F5'}></Moneda>
                     </div>
-                    
+
                     <div className="col casilla header header-right">
                         <Globo color={'#ED25F5'}></Globo></div>
                     <div className="w-100"></div>
@@ -66,6 +61,9 @@ export const UsuarioPerfil = () => {
                     </ul>
 
                 </div>
+
+                <ProblemasLista problemasLista={[{ a: "b", a: "b" }, { a: "b", a: "b" }]}></ProblemasLista>
+
 
 
             </div>

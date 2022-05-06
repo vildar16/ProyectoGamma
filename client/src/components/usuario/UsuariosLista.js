@@ -15,18 +15,22 @@ export const UsuariosLista = () => {
 
   const [categorias, setCategorias] = useState([])
 
+  const [usuarios, setUsuarios] = useState([])
+
   const [cargando, setCargando] = useState(true)
+
+  const [{viendo, viendoNombre}, setViendo] = useState({viendo: "", viendoNombre:""})
 
   const [{ nombre_sesion }, setSesion] = useState({ nombre_sesion: 'Cargando...' })
 
   useEffect(() => {
 
-    getCategorias()
+    getUsuarios()
 
   }, [])
 
 
-  const usuarios = [{ usuario: 'Mauricio Munoz - 2018319153' },
+  const usuarios1 = [{ usuario: 'Mauricio Munoz - 2018319153' },
   { usuario: 'Mauricio Munoz - 2018319153' },
   { usuario: 'Mauricio Munoz - 2018319153' },
   { usuario: 'Mauricio Munoz - 2018319153' },
@@ -42,12 +46,18 @@ export const UsuariosLista = () => {
 
   ]
 
-  const getCategorias = async () => {
+  const getUsuarios = async () => {
     console.log(codigo_sesion)
     const sesion = await axios.get('http://localhost:5000/api/sesiones/' + codigo_sesion)
       .then(res => { setSesion({ nombre_sesion: res.data.message[0].nombre_sesion }) })
       .catch(error => { setCategorias([]) })
 
+
+
+      const users = await axios.get('http://localhost:5000/api/sesiones/usuarios_x_quest/' + codigo_sesion)
+      .then(res => { setUsuarios(res.data.message) })
+      .catch(error => { setUsuarios([]) })
+    console.log(usuarios)
     setCargando(false);
 
   }
@@ -68,7 +78,7 @@ export const UsuariosLista = () => {
             {
               usuarios.map((usuario) => (
 
-                <UsuarioCard usuario={usuario}></UsuarioCard>
+                <UsuarioCard usuario={usuario} setViendo={setViendo} ></UsuarioCard>
 
               ))
 
@@ -79,7 +89,7 @@ export const UsuariosLista = () => {
         </div>
 
         <div className="col-md-5 div-main m-4 ">
-          <UsuarioPerfil></UsuarioPerfil>
+          <UsuarioPerfil viendo={viendo} viendoNombre={viendoNombre} ></UsuarioPerfil>
 
 
         </div>

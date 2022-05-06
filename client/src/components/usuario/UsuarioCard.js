@@ -2,16 +2,25 @@ import React, { useEffect } from 'react'
 import { Moneda } from '../puntaje/Moneda'
 import { BsFillEyeFill } from 'react-icons/bs';
 
-export const UsuarioCard = ({usuario}) => {
-    
+export const UsuarioCard = ({ usuario, setViendo, setVerProblemas, verProblemas }) => {
 
 
-      const style = { color: '#43c000', 
-                      fontSize: "2em", 
-                      filter: "drop-shadow(2px 2px 2px rgb(0 0 0 / 0.3))"
-                     }
 
-  
+  const style = {
+    color: '#43c000',
+    fontSize: "2em",
+    filter: "drop-shadow(2px 2px 2px rgb(0 0 0 / 0.3))"
+  }
+
+
+  const handleVer = async () => {
+    setViendo({viendo:usuario.nombre_usuario, viendoNombre:usuario.nombre + " " + usuario.apellido1 + " " + usuario.apellido2 })
+    await setVerProblemas(!verProblemas);
+    console.log(verProblemas)
+
+  }
+
+
 
   return (
 
@@ -22,16 +31,17 @@ export const UsuarioCard = ({usuario}) => {
         <div className='row'>
           <div className="col-md-11 d-flex justify-content-start" >
             <h3>
-            {usuario.usuario}
-            </h3>   
+              {usuario.nombre + " " + usuario.apellido1 + " " + usuario.apellido2}
+            </h3>
           </div>
           <div className="col-md-1" >
             <button
 
               className="nav-item nav-link btn navbar-log"
-            
+              onClick={handleVer}
+
             >
-              <BsFillEyeFill  style={style} />
+              <BsFillEyeFill style={style} />
             </button>
 
           </div>

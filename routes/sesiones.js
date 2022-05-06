@@ -21,7 +21,9 @@ router.route('/categorias_x_quest/:id_sesion')
 router.route('/:codigo_sesion')
     .get(getSesion)
 
-router.route('/usuarios_x_sesion/:codigo_sesion')
+
+router.route('/usuarios_x_quest/:codigo_quest')
     .get(usuarios_x_quest)
+
 
 module.exports = router;

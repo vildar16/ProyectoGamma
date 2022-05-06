@@ -201,15 +201,15 @@ ControladorSesion.getCategorias_x_quest = async (req, res) => {
 
 
 //@desc: obtiene sesiones de un usuario
-//@route: GET api/usuarios/sesiones_x_usuario
+//@route: GET api/sesiones/usuarios_x_quest
 ControladorSesion.usuarios_x_quest = async (req, res) => {
     
-    const {codigo_sesion} =req.params;
+    const {codigo_quest} =req.params;
     console.log(req.params);
     try{
         
-        const [sesion_x_usuario] = await sequelize.query(`select u.nombre_usuario from usuario u left join usuarios_x_quest uxs 
-                                                            on uxs.id_usuario = u.nombre_usuario where uxs.id_sesion = ${codigo_sesion}`)
+        const [sesion_x_usuario] = await sequelize.query(`select * from usuario u left join usuarios_x_quest uxs 
+                                                            on uxs.id_usuario = u.nombre_usuario where uxs.id_sesion = ${codigo_quest}`)
         res.json({message: sesion_x_usuario });
 
     }catch(error){
