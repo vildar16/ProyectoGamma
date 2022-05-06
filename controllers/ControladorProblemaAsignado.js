@@ -275,7 +275,7 @@ ControladorProblemaAsignado.asignarProblemasQuest = async (req, res) => {
 
         const [categorias] = await sequelize.query(`SELECT id_categoria FROM categorias_x_quest WHERE id_sesion = "${codigo_sesion}"`)
         const [usuarios] = await sequelize.query(`SELECT id_usuario FROM usuarios_x_quest WHERE id_sesion = "${codigo_sesion}"`)
-        categorias.forEach(element => repartirProblemas(element, usuarios));
+        categorias.forEach(element => repartirProblemas(element, usuarios, codigo_sesion));
         res.status(200).json({
             ok: true,
             msg: `Repartición de problemas realizada correctamente.`,
@@ -292,7 +292,7 @@ ControladorProblemaAsignado.asignarProblemasQuest = async (req, res) => {
     
 }
 
-async function repartirProblemas(item, usuarios) {
+async function repartirProblemas(item, usuarios, codigo_sesion) {
 
     try{
         console.log(item.id_categoria)
@@ -314,7 +314,8 @@ async function repartirProblemas(item, usuarios) {
 
                 const foundItem = await ProblemaAsignado.findOne({where: {
                     id_problema_catalogo: problemas[i].id_problema,
-                    id_usuario: usuarios[numUsuario].id_usuario
+                    id_usuario: usuarios[numUsuario].id_usuario,
+                    codigo_quest: codigo_sesion
                     }
                 });
 
@@ -322,7 +323,8 @@ async function repartirProblemas(item, usuarios) {
                     const asignacion = await ProblemaAsignado.create({
                         resuelto: 0,
                         id_usuario: usuarios[numUsuario].id_usuario,
-                        id_problema_catalogo: problemas[i].id_problema
+                        id_problema_catalogo: problemas[i].id_problema,
+                        codigo_quest: codigo_sesion
                     })
                 }
                 //this.crearProblemaUsuario(usuarios[numUsuario], problemas[i]);
