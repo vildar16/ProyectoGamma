@@ -315,18 +315,25 @@ ControladorSesion.setUsuariosCSV = async (req, res) => {
 }
 
 async function leerArchivo(filePath, codigo_quest) {
-    CSVToJSON().fromFile(filePath)
-    .then(users => {
-        console.log(users);
-        users.forEach(async element => {
-            await sequelize.query('CALL insertUsuariosQuest (:id_usuario, :id_sesion)',
-                                {replacements: {id_usuario: element.nombre_usuario, id_sesion: codigo_quest}})
-                
-        });
-
-    }).catch(err => {
-        console.log(err);
-    });
+    try {
+        var list = `INSERT INTO usuarios_x_quest (id_usuario, id_sesion)
+                    VALUES `;
+        CSVToJSON().fromFile(filePath)
+        .then(users => {
+            console.log(users);
+            users.forEach(async element => {
+                list += `('${element.nombre_usuario}','${codigo_quest}'),`
+                    
+            });
+            var list2 = list.slice(0, -1) + `;`;
+            console.log(list2)
+            sequelize.query(list2)
+        return
+    })
+    }catch(error){
+        console.log(error)
+        return
+    }
 
 }
 
