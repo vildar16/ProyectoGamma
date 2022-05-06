@@ -23,9 +23,16 @@ export const UsuarioPerfil = ({ viendo, viendoNombre, problemas}) => {
     return (
         <>
             <div className="login-form-1 m-1 div-gen perfil div-with-scroll" id='left'>
+
+
+
                 <h1>{viendoNombre}</h1>
 
+                <ProblemasLista problemasLista={problemas}></ProblemasLista>
 
+                <br></br>
+                <br></br>
+                <h1>Tabla Resumen:</h1>
                 <div className="row">
                     <div className="col casilla header header-left d-flex align-items-center">
                         <h2>
@@ -62,9 +69,7 @@ export const UsuarioPerfil = ({ viendo, viendoNombre, problemas}) => {
 
                 </div>
 
-                <ProblemasLista problemasLista={problemas}></ProblemasLista>
-
-
+                
 
             </div>
 

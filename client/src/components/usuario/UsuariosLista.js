@@ -107,9 +107,9 @@ export const UsuariosLista = () => {
       <div className="row">
 
 
-        <h1>Jugadores en {nombre_sesion} </h1>
+        <h1 className='m-4'>Jugadores en {nombre_sesion} </h1>
 
-        <div>
+        <div className='m-4'>
                 <input type="file" accept='.csv' onChange={onFileChange}/>
                 <button onClick={onFileUpload}>
                   Upload!
