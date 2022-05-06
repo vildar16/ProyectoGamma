@@ -7,6 +7,7 @@ import { Navbar } from "../components/ui/Navbar";
 import { UsuariosLista } from "../components/usuario/UsuariosLista";
 import { Problemas } from "../components/problemas/Problemas";
 import { CodigoFuente } from "../components/codigoFuente/CodigoFuente";
+import { ProblemasAsignados } from "../components/problemasAsignados/ProblemasAsignados";
 
 export const DashboardRoutes = () => {
   return (
@@ -20,6 +21,7 @@ export const DashboardRoutes = () => {
             <Route path="problemas/:codigo_categoria" element={<Problemas />} />
             <Route path="usuarios/:codigo_sesion" element={<UsuariosLista />} />
             <Route path="codigoFuente" element={<CodigoFuente />} />
+            <Route path="problemasAsignados/:codigo_sesion" element={<ProblemasAsignados />} />
             <Route path="/" element={<Placeholder />} />
            
         </Routes>

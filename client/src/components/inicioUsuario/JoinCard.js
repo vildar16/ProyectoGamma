@@ -14,7 +14,7 @@ export const JoinCard = ({ sesion, getSesiones }) => {
         </div>
 
         <Link
-          to={"/codigoFuente/"}
+          to={"/problemasAsignados/"+sesion.codigo_sesion}
           className="btnSubmit">
           Ver Sesion
 

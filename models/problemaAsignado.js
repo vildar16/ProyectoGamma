@@ -14,6 +14,7 @@ module.exports = sequelize.define("problema_asignado", {
   codigo_fuente: Sequelize.TEXT,
   analisis: Sequelize.TEXT,
   id_usuario: Sequelize.STRING(100),
-  id_problema_catalogo: Sequelize.INTEGER(11)
+  id_problema_catalogo: Sequelize.INTEGER(11),
+  codigo_quest: Sequelize.INTEGER(11)
 
 });
