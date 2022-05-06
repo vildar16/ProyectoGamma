@@ -201,7 +201,7 @@ ControladorSesion.getCategorias_x_quest = async (req, res) => {
 
 
 //@desc: obtiene sesiones de un usuario
-//@route: GET api/sesiones/usuarios_x_sesion/:codigo_sesion
+//@route: GET api/sesiones/usuarios_x_quest/:codigo_quest
 ControladorSesion.usuarios_x_quest = async (req, res) => {
     
     const {codigo_quest} =req.params;
@@ -266,7 +266,9 @@ ControladorSesion.problemasUsuarioSesion = async (req, res) => {
 
 
 
-/*ControladorSesion.setUsuariosCSV = async (req, res) => {
+//@desc: agrega usuarios a una sesion por medio de un csv
+//@route: GET api/sesiones/csv-usuarios
+ControladorSesion.setUsuariosCSV = async (req, res) => {
     
     const {codigo_sesion, path} =req.params;
     console.log(req.params);
@@ -274,8 +276,8 @@ ControladorSesion.problemasUsuarioSesion = async (req, res) => {
         
         const fs = require("fs");
         const data = fs.readFile(path, "utf-8");
-        const [sesion_x_usuario] = await sequelize.query(`select u.nombre_usuario from usuario u left join usuarios_x_quest uxs 
-                                                            on uxs.id_usuario = u.nombre_usuario where uxs.id_sesion = ${codigo_sesion}`)
+        //const [sesion_x_usuario] = await sequelize.query(`select u.nombre_usuario from usuario u left join usuarios_x_quest uxs 
+        //                                                    on uxs.id_usuario = u.nombre_usuario where uxs.id_sesion = ${codigo_sesion}`)
 
         res.status(200).json({
             ok: true,
@@ -292,6 +294,6 @@ ControladorSesion.problemasUsuarioSesion = async (req, res) => {
 
     }
     
-}*/
+}
 
 module.exports = ControladorSesion;
