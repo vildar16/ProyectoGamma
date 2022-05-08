@@ -279,7 +279,7 @@ ControladorSesion.problemasUsuarioSesion = async (req, res) => {
 
 
 //@desc: agrega usuarios a una sesion por medio de un csv
-//@route: GET api/sesiones/csv-usuarios/:codigo_quest
+//@route: POST api/sesiones/csv-usuarios/:codigo_quest
 ControladorSesion.setUsuariosCSV = async (req, res) => {
     
     try {
