@@ -4,15 +4,15 @@ services:
     container_name: expressapp
     build: .
     expose:
-        - 5555
+        - 5000
     volumes:
-        - . :/usr/src/app
+        - .:/usr/src/app
 
   reactapp:
     container_name: reactapp
     build: ./client
     expose:
-        - 3333
+        - 3000
     volumes:
         - ./client:/usr/src/app
   nginx:
