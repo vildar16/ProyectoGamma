@@ -58,6 +58,14 @@ export const Navbar = () => {
                     Categorías
                 </NavLink>
 
+                <NavLink 
+                    
+                    className={({isActive}) => 'nav-item nav-link navbar-text' + (isActive ? 'active' : '')} 
+                    to="/canje"
+                >
+                    Canje
+                </NavLink>
+
 
 
             </div>

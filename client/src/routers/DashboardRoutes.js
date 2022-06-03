@@ -8,6 +8,7 @@ import { UsuariosLista } from "../components/usuario/UsuariosLista";
 import { Problemas } from "../components/problemas/Problemas";
 import { CodigoFuente } from "../components/codigoFuente/CodigoFuente";
 import { ProblemasAsignados } from "../components/problemasAsignados/ProblemasAsignados";
+import { Canje } from "../components/canje/Canje";
 
 export const DashboardRoutes = () => {
   return (
@@ -22,6 +23,7 @@ export const DashboardRoutes = () => {
             <Route path="usuarios/:codigo_sesion" element={<UsuariosLista />} />
             <Route path="codigoFuente/:codigo_problema_asignado" element={<CodigoFuente />} />
             <Route path="problemasAsignados/:codigo_sesion" element={<ProblemasAsignados />} />
+            <Route path="canje" element={<Canje />} />
             <Route path="/" element={<Placeholder />} />
            
         </Routes>
