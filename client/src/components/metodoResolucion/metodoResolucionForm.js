@@ -14,7 +14,7 @@ export const MetodoForm = ({getMetodos}) => {
         e.preventDefault();
         console.log(nombre_metodo_resolucion)
 
-        const res = await axios.post('http://localhost:5000/api/metodos/crear', 
+        const res = await axios.post(process.env.REACT_APP_API_CALL+'metodos/crear', 
         {
             nombre_metodo_resolucion: nombre_metodo_resolucion
         });

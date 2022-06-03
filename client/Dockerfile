@@ -1,5 +1,5 @@
 FROM node:14
-
+ENV REACT_APP_API_CALL=api/
 WORKDIR /app
 
 COPY . /app

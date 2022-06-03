@@ -9,7 +9,7 @@ export const Metodo = () => {
 
   const getMetodosDeResolucion = () => {
 
-    axios.get('http://localhost:5000/api/metodos/')
+    axios.get(process.env.REACT_APP_API_CALL+'metodos/')
       .then(res => { setMetodoDeResolucion(res.data.message) })
       .catch(error => { setMetodoDeResolucion([]) })
 

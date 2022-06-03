@@ -16,7 +16,7 @@ export const SesionForm = ({getSesiones}) => {
         console.log(codigo_sesion)
         console.log(nombre_sesion)
 
-        const res = await axios.post('http://localhost:5000/api/sesiones/crear', 
+        const res = await axios.post(process.env.REACT_APP_API_CALL+'sesiones/crear', 
         {
             codigo_sesion: codigo_sesion,
             nombre_sesion: nombre_sesion

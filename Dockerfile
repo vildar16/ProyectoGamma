@@ -1,5 +1,5 @@
 FROM node:14
-
+ENV JWT_SECRET=secretGamma
 WORKDIR /app
 
 COPY . /app

@@ -19,12 +19,12 @@ export const Categoria = () => {
 
   const getCategorias = async () => {
    console.log(codigo_sesion)
-    const sesion = await axios.get('http://localhost:5000/api/sesiones/' + codigo_sesion)
+    const sesion = await axios.get(process.env.REACT_APP_API_CALL+'sesiones/' + codigo_sesion)
       .then(res => { setSesion({nombre_sesion: res.data.message[0].nombre_sesion}) })
       .catch(error => { setCategorias([]) })
 
 
-    await axios.get('http://localhost:5000/api/categorias/')
+    await axios.get(process.env.REACT_APP_API_CALL+'categorias/')
       .then(res => { setCategorias(res.data.message) })
       .catch(error => { setCategorias([]) })
 
