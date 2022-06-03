@@ -13,7 +13,7 @@ export const Moneda = ({color}) => {
   useEffect(() => {
     console.log(getColors(color));
     //"#000000"
-    lottie.loadAnimation({
+    const animacion = lottie.loadAnimation({
       container: container.current,
       renderer: 'svg',
       loop: true,
@@ -42,6 +42,7 @@ export const Moneda = ({color}) => {
        moneda),
 
     })
+    animacion.setSpeed(5)
     
   }, [])
   

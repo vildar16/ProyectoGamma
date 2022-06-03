@@ -13,7 +13,7 @@ export const Globo = ({color}) => {
   useEffect(() => {
     console.log(getColors(color));
     
-    lottie.loadAnimation({
+    const animacion  = lottie.loadAnimation({
       container: container.current,
       renderer: 'svg',
       loop: true,
@@ -40,6 +40,7 @@ export const Globo = ({color}) => {
        globo),
 
     })
+    animacion.setSpeed(3)
     
   }, [])
   
