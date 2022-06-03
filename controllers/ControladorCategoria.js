@@ -183,7 +183,7 @@ const setCategoria = async (id_categoria, id_sesion) => {
 
     try{
 
-        const sesion_x_categoria = await sequelize.query(`INSERT INTO categorias_x_quest (id_categoria, id_sesion) VALUES (${id_categoria}, ${id_sesion})`)
+        const sesion_x_categoria = await sequelize.query(`INSERT INTO categorias_x_quest (id_categoria, id_sesion, costo_globo) VALUES (${id_categoria}, ${id_sesion}, 6)`)
 
         return sesion_x_categoria
 
