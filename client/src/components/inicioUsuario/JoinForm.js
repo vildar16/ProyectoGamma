@@ -14,7 +14,7 @@ export const JoinForm = ({getSesionesUsuario, nombre_usuario}) => {
         e.preventDefault();
         console.log(codigo_sesion)
 
-        const res = await axios.post('http://localhost:5000/api/usuarios/ingresar_sesion', 
+        const res = await axios.post(process.env.REACT_APP_API_CALL+'usuarios/ingresar_sesion', 
         {
             codigo_sesion: codigo_sesion,
             nombre_usuario: nombre_usuario

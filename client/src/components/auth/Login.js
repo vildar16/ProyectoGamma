@@ -38,7 +38,7 @@ export const Login = () => {
 
             try {
                 
-                const res = await axios.post('http://localhost:5000/api/usuarios/login', formValues);
+                const res = await axios.post(process.env.REACT_APP_API_CALL+'usuarios/login', formValues);
                 console.log(res)
                 const action = {
                     type: types.login,
@@ -64,7 +64,7 @@ export const Login = () => {
             <div className="row">
                 <div className="col-md-3"></div>
                 <div className="col-md-6 login-form-2">
-                    <h3>Ingreso</h3>
+                    <h3>{process.env.REACT_APP_TEST}</h3>
                     <form onSubmit={handleLogin}>
                         <div className="form-group">
                             <input 

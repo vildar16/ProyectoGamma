@@ -14,7 +14,7 @@ export default function Placeholder() {
 
   const getSesionesUsuario = async () => {
     console.log(usuario.nombre_usuario)
-    const sesion = await axios.get('http://localhost:5000/api/usuarios/sesiones_x_usuario/'+usuario.nombre_usuario)
+    const sesion = await axios.get(process.env.REACT_APP_API_CALL+'usuarios/sesiones_x_usuario/'+usuario.nombre_usuario)
       .then(res => { setSesiones(res.data.message) })
       .catch(error => { setSesiones([]) })
     

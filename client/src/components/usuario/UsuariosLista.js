@@ -47,13 +47,13 @@ export const UsuariosLista = () => {
 
   const getUsuarios = async () => {
     console.log(codigo_sesion)
-    const sesion = await axios.get('http://localhost:5000/api/sesiones/' + codigo_sesion)
+    const sesion = await axios.get(process.env.REACT_APP_API_CALL+'sesiones/' + codigo_sesion)
       .then(res => { setSesion({ nombre_sesion: res.data.message[0].nombre_sesion }) })
       .catch(error => { setCategorias([]) })
 
 
 
-      const users = await axios.get('http://localhost:5000/api/sesiones/usuarios_x_quest/' + codigo_sesion)
+      const users = await axios.get(process.env.REACT_APP_API_CALL+'sesiones/usuarios_x_quest/' + codigo_sesion)
       .then(res => { setUsuarios(res.data.message) })
       .catch(error => { setUsuarios([]) })
       
@@ -65,7 +65,7 @@ export const UsuariosLista = () => {
    await console.log('viendo '+viendo +""+ codigo_sesion) 
 
   
-   const probs = await axios.post('http://localhost:5000/api/sesiones/problemas_usuario_sesion', 
+   const probs = await axios.post(process.env.REACT_APP_API_CALL+'sesiones/problemas_usuario_sesion', 
     {
      nombre_usuario: viendoU,
      codigo_sesion: codigo_sesion
@@ -93,7 +93,7 @@ export const UsuariosLista = () => {
       },
       preservePath: true
     };
-    const res = await axios.post('http://localhost:5000/api/sesiones/csv-usuarios/' + codigo_sesion, formData, config)
+    const res = await axios.post(process.env.REACT_APP_API_CALL+'sesiones/csv-usuarios/' + codigo_sesion, formData, config)
 
     console.log(res);
 
@@ -102,7 +102,7 @@ export const UsuariosLista = () => {
   const onUsersUpload = async (event) => {
     event.preventDefault()
 
-    const res = await axios.post('http://localhost:5000/api/asignaciones/repartir/', 
+    const res = await axios.post(process.env.REACT_APP_API_CALL+'asignaciones/repartir/', 
     {
         codigo_sesion: codigo_sesion
     });

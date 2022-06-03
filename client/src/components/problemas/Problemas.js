@@ -39,14 +39,14 @@ export const Problemas = ({ nombreCategoria }) => {
     console.log("asdsad")
     console.log(codigo_categoria)
     
-    const sesion = await axios.get('http://localhost:5000/api/categorias/' + codigo_categoria)
+    const sesion = await axios.get(process.env.REACT_APP_API_CALL+'categorias/' + codigo_categoria)
       .then(res => { setCategoria({ nombre_categoria: res.data.message[0].nombre }) })
       .catch(error => { setCategorias([]) })
     console.log(sesion)
     setCargando(false);
 
 
-   const probs = await axios.get('http://localhost:5000/api/problemas/problemascategoria/'+codigo_categoria)
+   const probs = await axios.get(process.env.REACT_APP_API_CALL+'problemas/problemascategoria/'+codigo_categoria)
       .then(res => { setProblemas(res.data.message[0]) })
       .catch(error => { setProblemas([]) })
     console.log(probs)
