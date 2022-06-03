@@ -13,6 +13,12 @@ module.exports = sequelize.define("categorias_x_quest", {
     type: Sequelize.INTEGER(11),
     allowNull: false, 
     primaryKey: true
+  },
+
+  costo_globo: {
+    type: Sequelize.INTEGER(11),
+    allowNull: false, 
+    primaryKey: true
   }
 
 });
