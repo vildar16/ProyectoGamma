@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const { crearProblemaUsuario, borrarProblemaUsuario, actualizarProblemaUsuario, getAsignados, getAsignado, asignarProblemasQuest, subirSolucion, actualizarEstadoAsignacion} = require('../controllers/ControladorProblemaAsignado');
+const { crearProblemaUsuario, borrarProblemaUsuario, actualizarProblemaUsuario, getAsignados, getAsignado, asignarProblemasQuest, compilar, subirSolucion, actualizarEstadoAsignacion} = require('../controllers/ControladorProblemaAsignado');
 
 router.route('/crear')
     .post(crearProblemaUsuario)
@@ -26,5 +26,9 @@ router.route('')
 
 router.route('/:id')
     .get(getAsignado)
+
+router.route('/compilar')
+    .post(compilar)
+
 
 module.exports = router;

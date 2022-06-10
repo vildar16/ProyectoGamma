@@ -340,4 +340,35 @@ async function repartirProblemas(item, usuarios, codigo_sesion) {
     
 }
 
+
+ControladorProblemaAsignado.compilar = async (req, res) => {
+    try {
+        console.log(req.body)
+
+        const response = await import('node-fetch').then(({ default: fetch }) => fetch('https://api.jdoodle.com/execute', {
+            method: 'POST', body: JSON.stringify({
+
+                clientId: "26f666fdaefad5ba6b387617d1406c6b",
+                clientSecret: "45de124ce070f6f56eb493668bfb3facb994767426f575ece98b0c843bd47350",
+                language: req.body.lenguaje,
+                script: req.body.script,
+                versionIndex: "0"
+
+            }),headers: {'Content-Type': 'application/json'}
+        }));
+        console.log(response)
+        const data = await response.json();
+        res.json({ message: data });
+
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            ok: false,
+            msg: 'Error al loguearse.'
+        })
+
+    }
+
+}
+
 module.exports = ControladorProblemaAsignado;

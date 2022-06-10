@@ -28,11 +28,8 @@ export const CodigoFuente = () => {
 
 
     const body = {
-      clientId: clientId,
-      clientSecret: clientSecret,
       script: script,
       language: language,
-      versionIndex: versionIndex
     }
 
 
@@ -46,7 +43,7 @@ export const CodigoFuente = () => {
           }
         }
 
-      const res = await axios.post('https://api.jdoodle.com/v1/execute', body, config);
+      const res = await axios.post('http://localhost:5000/api/asignaciones/compilar', body, config);
       console.log(res)
 
     } catch (error) {
