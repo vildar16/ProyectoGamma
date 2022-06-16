@@ -21,14 +21,15 @@ ControladorAyuda.crearAyuda = async (req, res) => {
         
         const today = new Date()
         const date = today
-        var dias = 3
-        for (d = 0; d < dias; d++) {
+        var dias = 4
+        const diaslim = dias
+        for (d = 0; d < diaslim; d++) {
             date.setDate(date.getDate() + 1)
             if (hd.isHoliday(date)) {
-                dias = 7
+                dias = 8
             }
         }
-        today.setDate(today.getDate() + dias).toJSON().slice(0, 10)
+        today.setDate(today.getDate() + dias)
         tiempo_lim = today.toJSON().slice(0, 10)
 
         const ayuda = await Ayuda.create({

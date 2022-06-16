@@ -22,13 +22,13 @@ module.exports = sequelize.define("ganancias_x_usuario_x_quest", {
     },
 
     monedas: {
-        type: Sequelize.INTEGER(11),
+        type: Sequelize.FLOAT(11),
         allowNull: false
     },
 
 
     globos: {
-        type: Sequelize.INTEGER(11),
+        type: Sequelize.FLOAT(11),
         allowNull: false
     }
 

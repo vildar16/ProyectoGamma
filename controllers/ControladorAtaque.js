@@ -57,28 +57,29 @@ ControladorAtaque.crearAtaque = async (req, res) => {
 //@route: PUT api/ataque/responder/
 ControladorAtaque.responderAtaque = async (req, res) => {
     console.log(req.body);
-    const {id_problema, id_usuario_emisor, id_usuario_receptor, id_metodo_resolucion, timestamp} =req.body;
+    const {id_problema, id_usuario_emisor, id_usuario_receptor, id_metodo_resolucion/*, timestamp*/} =req.body;
     
     try {
 
-        if(!id_problema || !id_usuario_emisor || !id_usuario_receptor || !id_metodo_resolucion || !timestamp){
+        if(!id_problema || !id_usuario_emisor || !id_usuario_receptor || !id_metodo_resolucion/* || !timestamp*/){
             res.status(400).json({
                 ok: false,
                 msg: 'Campos requeridos son nulos o no válidos.'
             })
         }
         
-        const [year, month, day] = [...timestamp.split("-")]
-        const today = new Date(year, month - 1, day)
+        //const [year, month, day] = [...timestamp.split("-")]
+        const today = new Date(/*year, month - 1, day*/)
         const date = today
-        var dias = 3
-        for (d = 0; d < dias; d++) {
+        var dias = 4
+        const diaslim = dias
+        for (d = 0; d < diaslim; d++) {
             date.setDate(date.getDate() + 1)
             if (hd.isHoliday(date)) {
-                dias = 7
+                dias = 8
             }
         }
-        today.setDate(today.getDate() + dias)
+        today.setDate(today.getDate() + dias - diaslim)
         tiempo_lim = today.toJSON().slice(0, 10)
 
         await Ataque.update({
