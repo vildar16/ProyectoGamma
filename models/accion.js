@@ -30,7 +30,7 @@ module.exports = sequelize.define("usuario_accion_usuario", {
 
   timestamp: Sequelize.DATE,
 
-  tiempo: Sequelize.INTEGER(11),
+  tiempo: Sequelize.DATE,
 
   efectuo: Sequelize.INTEGER(11)
   
