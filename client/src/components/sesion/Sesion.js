@@ -9,7 +9,7 @@ export const Sesion = () => {
 
   const getSesiones = () => {
 
-    axios.get(process.env.REACT_APP_API_CALL+'sesiones/')
+    axios.get('/api/sesiones/')
       .then(res => { setSesiones(res.data.message) })
       .catch(error => { setSesiones([]) })
 

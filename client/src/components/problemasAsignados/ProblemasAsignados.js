@@ -21,7 +21,7 @@ export const ProblemasAsignados = () => {
   const getProblemas = async () => {
 
 
-    const probs = await axios.post(process.env.REACT_APP_API_CALL+'sesiones/problemas_usuario_sesion',
+    const probs = await axios.post('/api/sesiones/problemas_usuario_sesion',
       {
         nombre_usuario: usuario.nombre_usuario,
         codigo_sesion: codigo_sesion

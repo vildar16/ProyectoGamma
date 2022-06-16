@@ -34,7 +34,7 @@ export const ProblemasForm = ({getProblemas, id_categoria}) => {
         
         if(ok){
             try {
-                const res = await axios.post(process.env.REACT_APP_API_CALL+'problemas/crear',
+                const res = await axios.post('/api/problemas/crear',
                     {
                         nombre: nombre,
                         link: link,

@@ -51,7 +51,7 @@ export const Registro = () => {
 
 
             try {
-                const res = await axios.post(process.env.REACT_APP_API_CALL+'usuarios/registro',
+                const res = await axios.post('/api/usuarios/registro',
                 {
                     nombre: nombre,
                     nombre_usuario: nombre_usuario,

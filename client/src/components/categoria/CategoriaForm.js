@@ -40,7 +40,7 @@ export const CategoriaForm = ({ getCategorias, sesion, setCreando}) => {
         if(ok){
             setCreando(true)
             try {
-                const res = await axios.post(process.env.REACT_APP_API_CALL+'categorias/crear',
+                const res = await axios.post('/api/categorias/crear',
                     {
                         nombre: nombre,
                         color: style.color,

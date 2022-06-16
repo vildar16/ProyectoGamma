@@ -38,7 +38,7 @@ export const Login = () => {
 
             try {
                 
-                const res = await axios.post(process.env.REACT_APP_API_CALL+'usuarios/login', formValues);
+                const res = await axios.post('/api/usuarios/login', formValues);
                 console.log(res)
                 const action = {
                     type: types.login,
