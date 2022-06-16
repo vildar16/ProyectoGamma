@@ -4,7 +4,7 @@ const app = express();
 const cors = require('cors');
 let busboy = require('connect-busboy');
 require("./db");
-
+var path = require('path');
 const port = process.env.PORT || 5000;
 
 const corsOptions ={
