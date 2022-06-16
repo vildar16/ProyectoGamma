@@ -38,9 +38,13 @@ export const ProblemasCard = ({nombre, link, categoria = '', id_problema_asignad
           <div className="col-md-4" >
           
 
-          <a href={"/codigoFuente/"+id_problema_asignado} rel="noreferrer" className="btnSubmit m-5">
-            Subir Solución
-          </a>
+          <Link
+                    to={"/codigoFuente/"+id_problema_asignado}
+                    style={{textDecoration: "none"}}
+                    className="btnSubmit m-5">
+                    Subir Sol
+
+          </Link>
 
           </div>}
 
