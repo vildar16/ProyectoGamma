@@ -7,9 +7,9 @@ router.route('/crear')
     .post(crearAtaque)
 
 router.route('/responder')
-    .post(responderAtaque)
+    .put(responderAtaque)
 
 router.route('/revisado')
-    .post(ataqueRevisado)
+    .put(ataqueRevisado)
 
 module.exports = router;
