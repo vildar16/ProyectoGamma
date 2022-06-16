@@ -5,7 +5,7 @@ var hd = new Holidays('CR')
 //require('dotenv').config();
 
 //@desc: permite crear una ayuda
-//@route: POST api/ayuda/crear/
+//@route: POST api/ayudas/crear/
 ControladorAyuda.crearAyuda = async (req, res) => {
     console.log(req.body);
     const {id_problema, id_usuario_emisor, id_metodo_resolucion} =req.body;
@@ -20,6 +20,7 @@ ControladorAyuda.crearAyuda = async (req, res) => {
         }
         
         const today = new Date()
+        console.log(today)
         const date = today
         var dias = 4
         const diaslim = dias
@@ -29,7 +30,7 @@ ControladorAyuda.crearAyuda = async (req, res) => {
                 dias = 8
             }
         }
-        today.setDate(today.getDate() + dias)
+        today.setDate(today.getDate() + dias - diaslim)
         tiempo_lim = today.toJSON().slice(0, 10)
 
         const ayuda = await Ayuda.create({
@@ -68,7 +69,7 @@ ControladorAyuda.crearAyuda = async (req, res) => {
 }
 
 //@desc: permite asignar una ayuda
-//@route: PUT api/ayuda/asingar/
+//@route: PUT api/ayudas/asignar/
 ControladorAyuda.asignarAyuda = async (req, res) => {
     console.log(req.body);
     const {id_problema, id_usuario_emisor, id_usuario_receptor, id_metodo_resolucion} =req.body;
@@ -110,7 +111,7 @@ ControladorAyuda.asignarAyuda = async (req, res) => {
 }
 
 //@desc: permite responder a una ayuda
-//@route: PUT api/ayuda/responder/
+//@route: PUT api/ayudas/responder/
 ControladorAyuda.responderAyuda = async (req, res) => {
     console.log(req.body);
     const {id_problema, id_usuario_emisor, id_usuario_receptor, id_metodo_resolucion, efectuo} =req.body;
@@ -153,7 +154,7 @@ ControladorAyuda.responderAyuda = async (req, res) => {
 }
 
 //@desc: actualiza el estado de la ayuda a revisado
-//@route: PUT api/ayuda/revisado/
+//@route: PUT api/ayudas/revisar/
 ControladorAyuda.revisarAyuda = async (req, res) => {
     console.log(req.body);
     const {id_problema, id_usuario_emisor, id_usuario_receptor, id_metodo_resolucion} =req.body;

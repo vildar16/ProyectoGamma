@@ -6,7 +6,7 @@ const { crearAyuda, asignarAyuda, responderAyuda, revisarAyuda} = require('../co
 router.route('/crear')
     .post(crearAyuda)
 
-router.route('/asingar')
+router.route('/asignar')
     .put(asignarAyuda)
 
 router.route('/responder')
