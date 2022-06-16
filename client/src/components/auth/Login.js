@@ -64,7 +64,7 @@ export const Login = () => {
             <div className="row">
                 <div className="col-md-3"></div>
                 <div className="col-md-6 login-form-2">
-                    <h3>{process.env.REACT_APP_TEST}</h3>
+                    <h3>Login</h3>
                     <form onSubmit={handleLogin}>
                         <div className="form-group">
                             <input 
