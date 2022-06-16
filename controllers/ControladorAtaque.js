@@ -78,7 +78,7 @@ ControladorAtaque.responderAtaque = async (req, res) => {
                 dias = 7
             }
         }
-        today.setDate(today.getDate() + dias).toJSON().slice(0, 10)
+        today.setDate(today.getDate() + dias)
         tiempo_lim = today.toJSON().slice(0, 10)
 
         await Ataque.update({
