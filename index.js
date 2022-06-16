@@ -37,6 +37,7 @@ app.use('/api/acciones', require('./routes/dashboard'));
 app.use('/api/ataques', require('./routes/ataque'));
 app.use('/api/ayudas', require('./routes/ayuda'));
 app.use('/api/busquedas', require('./routes/busqueda'));
+app.use('/api/canje', require('./routes/obtencionCanje'));
 
 
 
