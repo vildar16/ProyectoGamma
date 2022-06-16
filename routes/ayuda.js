@@ -1,15 +1,18 @@
 const express = require('express');
 const router = express.Router();
 
-const { crearAyuda, asignarAyuda, responderAyuda} = require('../controllers/ControladorAyuda');
+const { crearAyuda, asignarAyuda, responderAyuda, revisarAyuda} = require('../controllers/ControladorAyuda');
 
 router.route('/crear')
     .post(crearAyuda)
 
 router.route('/asingar')
-    .post(asignarAyuda)
+    .put(asignarAyuda)
 
 router.route('/responder')
-    .post(responderAyuda)
+    .put(responderAyuda)
+
+router.route('/revisar')
+    .put(revisarAyuda)
 
 module.exports = router;

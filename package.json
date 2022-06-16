@@ -20,6 +20,7 @@
     "cors": "^2.8.5",
     "csv-parse": "^5.0.4",
     "csvtojson": "^2.0.10",
+    "date-holidays": "^3.16.0",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
     "jsonwebtoken": "^8.5.1",
