@@ -20,7 +20,7 @@ export const CodigoFuente = () => {
     script: "",
   })
 
-  const {script} = formValues;
+  const { script } = formValues;
 
   const compilar = async (e) => {
     e.preventDefault();
@@ -40,8 +40,8 @@ export const CodigoFuente = () => {
         headers: {
           "Content-Type": "application/json",
           'Access-Control-Allow-Origin': '*',
-          }
         }
+      }
 
       const res = await axios.post('http://localhost:5000/api/asignaciones/compilar', body, config);
       console.log(res)
@@ -62,15 +62,16 @@ export const CodigoFuente = () => {
         <h1 className=" form-group m-6"    >Código Fuente</h1>
         <form onSubmit={compilar}>
           <div className="form-group textarea1" cols="600" >
-            <textarea 
-              className="form-control m-6 textarea1" 
-              id="exampleFormControlTextarea1" 
-              rows="3" 
+            <textarea
+              className="form-control m-6 textarea1"
+              id="exampleFormControlTextarea1"
+              rows="3"
               name='script'
-              value={script} 
+              value={script}
               onChange={handleInputChange}></textarea>
           </div>
         </form>
+        
         <button type="button" className="btn btn-success" onClick={compilar}>Subir Código</button>
 
 
