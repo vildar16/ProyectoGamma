@@ -210,7 +210,43 @@ ControladorProblemaAsignado.actualizarEstadoAsignacion = async (req, res) => {
     }    
 }
 
+//@desc: permite actualizar el estado a rechazado de un problema (0 = sin hacer)
+//@route: PUT api/asignaciones/estadorechazado/
+ControladorProblemaAsignado.actualizarEstadoAsignacionRechazado = async (req, res) => {
+    const {id_problema_asignado} =req.body;
+    
+    try {
 
+        if(!id_problema_asignado){
+            res.status(400).json({
+                ok: false,
+                msg: 'Campos requeridos son nulos o no válidos.'
+            })
+        }
+        
+        await ProblemaAsignado.update({
+            resuelto: 0
+        }, {
+            where: {
+                id_problema_asignado: id_problema_asignado
+            }
+        })
+        
+        res.status(200).json({
+            ok: true,
+            msg: `Estado 'sin hacer' de un problema actualizado correctamente.`,
+        })
+
+    } catch (error) {
+
+        console.log(error)
+        res.status(500).json({
+            ok: false,
+            msg: 'Error al actualizar el estado del problema.'
+        })
+        
+    }    
+}
 
 //@desc: Obtener todas las asignaciones a problemas
 //@route: GET api/asignaciones/
@@ -234,8 +270,6 @@ ControladorProblemaAsignado.getAsignados = async (req, res) => {
     }
     
 }
-
-
 
 //@desc: Obtener una asignación de un problema
 //@route: GET api/asignaciones/:id
@@ -264,6 +298,56 @@ ControladorProblemaAsignado.getAsignado = async (req, res) => {
     
 }
 
+//@desc: Obtener todas las asignaciones a problemas de un quest
+//@route: GET api/asignaciones/xquest
+ControladorProblemaAsignado.getAsignadosXquest = async (req, res) => {
+    const {id_quest} =req.body;
+    try{
+
+        const asignaciones = await ProblemaAsignado.findAll({
+            attributes: ['id_problema_asignado', 'id_usuario', 'id_problema_catalogo', 'resuelto', 'codigo_fuente', 'analisis'],
+            where: { codigo_quest: id_quest }
+        })
+        res.json({message: asignaciones });
+
+    }catch(error){
+
+        console.log(error)
+        res.status(500).json({
+            ok: false,
+            msg: 'Error al obtener las asignaciones a problemas por quest.'
+        })
+
+    }
+    
+}
+
+//@desc: Obtener todas las asignaciones a problemas de un quest
+//@route: GET api/asignaciones/xquest_sinrevisar
+ControladorProblemaAsignado.getAsignadosXquestSinRevisar = async (req, res) => {
+    const {id_quest} =req.body;
+    try{
+
+        const asignaciones = await ProblemaAsignado.findAll({
+            attributes: ['id_problema_asignado', 'id_usuario', 'id_problema_catalogo', 'resuelto', 'codigo_fuente', 'analisis'],
+            where: { 
+                codigo_quest: id_quest,
+                resuelto: 1
+            }
+        })
+        res.json({message: asignaciones });
+
+    }catch(error){
+
+        console.log(error)
+        res.status(500).json({
+            ok: false,
+            msg: 'Error al obtener las asignaciones a problemas por quest sin revisar.'
+        })
+
+    }
+    
+}
 
 //@desc: Asignar problemas a los usuarios por quest
 //@route: POST api/asignaciones/repartir/
