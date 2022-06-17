@@ -7,11 +7,11 @@ const Globo = require('../models/categoriasPorQuest');
 //@route: POST api/canje/crear/
 ControladorObtencionCanje.crearCanje= async (req, res) => {
     console.log(req.body);
-    const {id_sesion, id_categoria, id_usuario, monedas, globos} =req.body;
+    const {id_quest, id_categoria, id_usuario} =req.body;
     
     try {
 
-        if(!id_sesion || !id_categoria || !id_usuario || !monedas || !globos){
+        if(!id_quest || !id_categoria || !id_usuario){
             res.status(400).json({
                 ok: false,
                 msg: 'Campos requeridos son nulos o no válidos.'
@@ -19,7 +19,7 @@ ControladorObtencionCanje.crearCanje= async (req, res) => {
         }
         
         const canje = await Canje.create({
-            id_sesion: id_sesion,
+            id_quest: id_quest,
             id_categoria: id_categoria,
             id_usuario: id_usuario,
             monedas: 0,
@@ -267,6 +267,35 @@ ControladorObtencionCanje.canjearGlobo = async (req, res) => {
             msg: 'Error al asignar monedas.'
         })
         
+    }    
+}
+
+//@desc: permite canjer monedas por globos
+//@route: PUT api/canje/globos/
+ControladorObtencionCanje.todosJugadores = async (req, res) => {
+    console.log(req.body);
+    const {id_quest, id_usuario} =req.body;
+    
+    try{
+
+
+        const canjes = await Canje.findAll({
+            attributes: ['id_quest', 'id_categoria', 'id_usuario'],
+            where: {
+                id_quest:id_quest,
+                id_usuario:id_usuario
+            }
+        })
+        res.json({message: canjes });
+
+    }catch(error){
+
+        console.log(error)
+        res.status(500).json({
+            ok: false,
+            msg: 'Error al obtener los canjes.'
+        })
+
     }    
 }
 

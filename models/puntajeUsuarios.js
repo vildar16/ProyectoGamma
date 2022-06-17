@@ -3,7 +3,7 @@ const sequelize = require("../db");
 
 module.exports = sequelize.define("ganancias_x_usuario_x_quest", {
 
-    id_sesion: {
+    id_quest: {
         type: Sequelize.INTEGER(11),
         allowNull: false,
         primaryKey: true
