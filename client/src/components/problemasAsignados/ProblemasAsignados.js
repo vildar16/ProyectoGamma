@@ -29,22 +29,22 @@ export const ProblemasAsignados = () => {
     )
       .then(res => { setProblemas(res.data.message) })
       .catch(error => { setProblemas([]); console.log("error") })
-
-
+      console.log(problemas)
+      
   }
 
 
   return (
     <div className='row'>
       <h1>Mis Problemas</h1>
-      <div className="col-md-2 "></div>
+      <div className="col-md-1 "></div>
 
-      <div className="col-md-8 ">
+      <div className="col-md-10 ">
         <ProblemasLista problemasLista={problemas}></ProblemasLista>
       </div>
 
 
-      <div className="col-md-2 "></div>
+      <div className="col-md-1 "></div>
 
 
 

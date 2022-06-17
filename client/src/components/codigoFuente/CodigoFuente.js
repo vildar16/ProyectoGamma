@@ -12,7 +12,7 @@ export const CodigoFuente = () => {
   const [{ clientId, clientSecret, language, versionIndex }, setCompilacionValues] = useState({
     clientId: '26f666fdaefad5ba6b387617d1406c6b',
     clientSecret: '45de124ce070f6f56eb493668bfb3facb994767426f575ece98b0c843bd47350',
-    language: 'c',
+    language: 'java',
     versionIndex: '0'
   })
 
@@ -24,16 +24,6 @@ export const CodigoFuente = () => {
 
   const compilar = async (e) => {
     e.preventDefault();
-    console.log("asdasdasd")
-
-
-    const body = {
-      script: script,
-      language: language,
-    }
-
-
-
 
     try {
       let config = {
@@ -43,11 +33,12 @@ export const CodigoFuente = () => {
         }
       }
 
-      const res = await axios.post('http://localhost:5000/api/asignaciones/compilar', body, config);
-      console.log(res)
-
+      const res = await axios.post('/api/asignaciones/compilar', {script: script,
+      lenguaje: language}, config);
+      setCompilacion({output: res.data.message.output, statusCode: res.data.message.statusCode , memory: res.data.message.memory, cpuTime: res.data.message.cpuTime})
     } catch (error) {
       //setValidation({ ok: false, msg: "Error al loguearse." })
+      console.log("error")
     }
 
   }
@@ -86,6 +77,9 @@ export const CodigoFuente = () => {
           statusCode={statusCode}
           memory={memory}
           cpuTime={cpuTime}
+          compilar={compilar}
+          setCompilacionValues={setCompilacionValues}
+          script={script}
         ></Compilacion>
 
       </div>
