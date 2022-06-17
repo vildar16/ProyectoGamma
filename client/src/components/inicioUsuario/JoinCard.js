@@ -13,13 +13,22 @@ export const JoinCard = ({ sesion, getSesiones }) => {
 
         </div>
 
+        <br></br>
+
         <Link
           to={"/problemasAsignados/"+sesion.codigo_sesion}
           className="btnSubmit">
           Ver Sesion
 
         </Link>
+        <br></br>
+        <br></br>
+        <Link
+          to={"/dashboard/"+sesion.codigo_sesion}
+          className="btnSubmit">
+          Ver Dashboard
 
+        </Link>
 
     </div>
 

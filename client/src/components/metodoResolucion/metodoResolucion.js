@@ -41,7 +41,7 @@ export const Metodo = () => {
                 <div className="col div-main m-4">
                   <h1>Métodos actuales</h1>
 
-                  <ul className='list-group list-group-flush'>
+          <ul className='list-group list-group-flush'>
             <div className="row">
               {
                 metodoDeResolucion.map((metodo) => (
