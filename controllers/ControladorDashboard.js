@@ -19,7 +19,11 @@ ControladorDashboard.accionesXquest = async (req, res) => {
         const dashboard = await sequelize.query('CALL selectAcciones(:pQuest)',
             {replacements: { pQuest: id_quest }})
         
-        res.json({message: dashboard });
+        res.status(200).json({
+            ok: true,
+            msg: dashboard
+        })
+
 
     } catch (error) {
 
