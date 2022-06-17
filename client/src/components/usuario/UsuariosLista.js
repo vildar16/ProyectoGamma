@@ -93,7 +93,7 @@ export const UsuariosLista = () => {
       },
       preservePath: true
     };
-    const res = await axios.post('/api/sesiones/csv-usuarios/' + codigo_sesion, formData, config)
+    const res = await axios.post('/api/usuarios/csv-usuarios/' + codigo_sesion, formData, config)
 
     console.log(res);
 

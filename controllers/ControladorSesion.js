@@ -1,7 +1,6 @@
 const ControladorSesion = {};
 const sequelize = require('../db');
 const Sesion = require('../models/sesion');
-const UsuariosXQuest = require('../models/usuariosPorQuest');
 const busboy = require('connect-busboy');
 const fs = require('fs');
 const CSVToJSON = require('csvtojson');
@@ -276,66 +275,5 @@ ControladorSesion.problemasUsuarioSesion = async (req, res) => {
     
 }
 
-
-
-//@desc: agrega usuarios a una sesion por medio de un csv
-//@route: POST api/sesiones/csv-usuarios/:codigo_quest
-ControladorSesion.setUsuariosCSV = async (req, res) => {
-    
-    try {
-        const {codigo_quest} =req.params;
-        var filePath = '';
-        req.busboy.on('file', async function (fieldname, file, filename) {
-            console.log("received file")
-            filePath = './csv/' + filename.filename;
-            var fstream = fs.createWriteStream(filePath);
-            file.pipe(fstream);
-            fstream.on('close', async function () {
-                console.log("upload succeeded!")
-                fstream.end()
-                await leerArchivo(filePath, codigo_quest);
-            });
-        });
-        req.pipe(req.busboy);
-
-        res.status(500).json({
-            ok: true,
-            msg: 'Usuarios agregados correctamente al quest.'
-        })
-
-    }catch(error){
-
-        console.log(error)
-        res.status(500).json({
-            ok: false,
-            msg: 'Error al ingresar usuarios por medio de csv.'
-        })
-
-    }
-    
-}
-
-async function leerArchivo(filePath, codigo_quest) {
-    try {
-        var list = `INSERT INTO usuarios_x_quest (id_usuario, id_sesion)
-                    VALUES `;
-        CSVToJSON().fromFile(filePath)
-        .then(users => {
-            console.log(users);
-            users.forEach(async element => {
-                list += `('${element.nombre_usuario}','${codigo_quest}'),`
-                    
-            });
-            var list2 = list.slice(0, -1) + `;`;
-            console.log(list2)
-            sequelize.query(list2)
-        return
-    })
-    }catch(error){
-        console.log(error)
-        return
-    }
-
-}
 
 module.exports = ControladorSesion;
