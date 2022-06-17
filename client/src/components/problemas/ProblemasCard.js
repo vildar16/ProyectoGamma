@@ -1,19 +1,32 @@
 import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { AuthContext } from '../../auth/authContext'
+import axios from 'axios'
 
 export const ProblemasCard = ({ nombre, link, categoria = '', id_problema_asignado = '', asignado = false, resuelto = 0 }) => {
 
 
   const { usuario, dispatch } = useContext(AuthContext)
 
+  const onCancel = async () => {
+    console.log('cancel')
+  }
 
+  const onConfirm = async (id_problema_asignado, usuario) => {
+    const probs = await axios.post('/api/ayudas/crear', 
+    {
+     id_problema: id_problema_asignado,
+     id_usuario_emisor: usuario,
+     id_metodo_resolucion: 3
+    }
+   )
+  }
 
 
   return (<>
     <div>
 
-      <li className="list-group-item rounded login-form-2 m-1">
+      <li className="list-group-item rounded login-form-2 m-4">
 
         <div className='row'>
           <div className="col-md-4 d-flex justify-content-start" >
@@ -59,15 +72,26 @@ export const ProblemasCard = ({ nombre, link, categoria = '', id_problema_asigna
             </a>
 
           </div>
-          <div className="col-md-4" >
+          <div className="col-md-2" >
           
 
           {(resuelto===0&&usuario.id_tipo_usuario != 2)&&<h6>Asignado</h6>}
           {(resuelto===1&&usuario.id_tipo_usuario != 2)&&<h6>En revisión</h6>}
           {(resuelto===2&&usuario.id_tipo_usuario != 2)&&<h6>Aprobado</h6>}
+          {(resuelto===3&&usuario.id_tipo_usuario != 2)&&<h6>Corregir</h6>}
 
 
           </div>
+          <div className="col-md-2" >
+          
+          {(resuelto===0||resuelto===3&&usuario.id_tipo_usuario != 2)&&
+          <a type="button" className="btn btn-secondary btn-lg" onClick={() => { window.confirm('¿Está seguro de pedir ayuda?') ? onConfirm(id_problema_asignado, usuario.nombre_usuario) : onCancel() } }>Ayuda</a>}
+          {(resuelto===2&&usuario.id_tipo_usuario != 2)&&
+          <a href='' type="button" className="btn btn-secondary btn-lg">Ataca</a>}
+
+
+          </div>
+
 
 
 
