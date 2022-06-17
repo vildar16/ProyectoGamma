@@ -1,13 +1,22 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { BsListNested } from 'react-icons/bs';
 import './codigoFuente.css';
 import '../auth/login.css'
 import { useForm } from '../../hooks/useForm';
 import { Compilacion } from './Compilacion';
 import axios from 'axios'
+import { useParams } from 'react-router-dom';
 
 export const CodigoFuente = () => {
+  const [{estado, codigoEnviado}, setEstado] = useState({estado: 6})
 
+  useEffect(async ()  => {
+    
+    await getDatosProblema()
+  }, [])
+
+  const {codigo_problema_asignado} = useParams()
+  
   const [{ output, statusCode, memory, cpuTime }, setCompilacion] = useState({ output: "", statusCode: 1, memory: 0, cpuTime: 0 })
   const [{ clientId, clientSecret, language, versionIndex }, setCompilacionValues] = useState({
     clientId: '26f666fdaefad5ba6b387617d1406c6b',
@@ -43,15 +52,34 @@ export const CodigoFuente = () => {
 
   }
 
+  const getDatosProblema = async () => {
+    const res = await axios.get('/api/asignaciones/' + codigo_problema_asignado);
+    await setEstado({estado: res.data.message[0].resuelto, codigoEnviado: res.data.message[0].codigo_fuente})
+    console.log(res.data.message[0])
+    console.log(res.data.message[0].resuelto)
+    console.log(estado)
+    console.log(codigoEnviado)
 
+  }
 
   return (
     <div className="row">
       <div className="col-md-6 m-4">
-
-
-        <h1 className=" form-group m-6"    >Código Fuente</h1>
-        <form onSubmit={compilar}>
+      <h1 className=" form-group m-6"    >Código Fuente {estado}</h1>
+      {(estado===1||estado===2)&&<form onSubmit={compilar}>
+          <div className="form-group textarea1" cols="600" >
+            <textarea
+              className="form-control m-6 textarea1"
+              id="exampleFormControlTextarea1"
+              rows="3"
+              name='script'
+              value={codigoEnviado}
+              disabled={true}
+              onChange={handleInputChange}></textarea>
+          </div>
+        </form>}
+        
+        {(estado===0)&&<form onSubmit={compilar}>
           <div className="form-group textarea1" cols="600" >
             <textarea
               className="form-control m-6 textarea1"
@@ -61,12 +89,8 @@ export const CodigoFuente = () => {
               value={script}
               onChange={handleInputChange}></textarea>
           </div>
-        </form>
-        
-        <button type="button" className="btn btn-success" onClick={compilar}>Subir Código</button>
-
-
-
+        </form>}
+  
 
 
 
@@ -80,6 +104,7 @@ export const CodigoFuente = () => {
           compilar={compilar}
           setCompilacionValues={setCompilacionValues}
           script={script}
+          estado={estado}
         ></Compilacion>
 
       </div>

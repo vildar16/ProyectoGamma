@@ -275,13 +275,13 @@ ControladorProblemaAsignado.getAsignados = async (req, res) => {
 //@route: GET api/asignaciones/:id
 ControladorProblemaAsignado.getAsignado = async (req, res) => {
     console.log(req.body);
-    const {id_problema_asignado} =req.body;
+    const {id} =req.params;
 
     try{
 
         const asignacion = await ProblemaAsignado.findAll({
             where: {
-                id_problema_asignado: id_problema_asignado
+                id_problema_asignado: id
             }
         })
         res.json({message: asignacion });

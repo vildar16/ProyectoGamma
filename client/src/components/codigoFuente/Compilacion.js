@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useForm } from '../../hooks/useForm';
 import axios from 'axios'
 
-export const Compilacion = ({ output, statusCode, memory, cpuTime, compilar, setCompilacionValues, script }) => {
+export const Compilacion = ({ output, statusCode, memory, cpuTime, compilar, setCompilacionValues, script, estado }) => {
 
 
   const lenguajes = [{ nombre: 'java', code: 'java' }, { nombre: 'python', code: 'python3' }, { nombre: 'c++', code: 'cpp' }]
@@ -37,7 +37,7 @@ export const Compilacion = ({ output, statusCode, memory, cpuTime, compilar, set
 
   return (
     <div>
-      <h3>Output:</h3>
+      <h3>Output: {estado}</h3>
       <h4>  {output}</h4>
 
       <hr></hr>
@@ -69,7 +69,13 @@ export const Compilacion = ({ output, statusCode, memory, cpuTime, compilar, set
           </select>
           <button type="button" className="btn btn-success" onClick={compilar}>Ejecutar</button>
           <hr></hr>
-          <button type="button" className="btn btn-success"  onClick={subirCodigo}>Subir Código</button>
+
+          {(estado===1)&&<h4>Esperando revisión...</h4>}
+          {(estado===3)&&<h4>Es necesaria una corrección</h4>}
+          {(estado===0||estado===3)&&<button type="button" className="btn btn-success"  onClick={subirCodigo}>Subir Código</button>}
+          {(estado===2)&&<h4>¡Problema solucionado!</h4>}
+          
+          
         </div>
       </div>
     </div>
