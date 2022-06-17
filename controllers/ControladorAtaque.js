@@ -5,7 +5,7 @@ var hd = new Holidays('CR')
 //require('dotenv').config();
 
 //@desc: permite crear un ataque
-//@route: POST api/ataque/crear/
+//@route: POST api/ataques/crear/
 ControladorAtaque.crearAtaque = async (req, res) => {
     console.log(req.body);
     const {id_problema, id_usuario_emisor, id_usuario_receptor, id_metodo_resolucion} =req.body;
@@ -19,13 +19,27 @@ ControladorAtaque.crearAtaque = async (req, res) => {
             })
         }
         
+        const today = new Date()
+        console.log(today)
+        const date = today
+        var dias = 4
+        const diaslim = dias
+        for (d = 0; d < diaslim; d++) {
+            date.setDate(date.getDate() + 1)
+            if (hd.isHoliday(date)) {
+                dias = 8
+            }
+        }
+        today.setDate(today.getDate() + dias - diaslim)
+        tiempo_lim = today.toJSON().slice(0, 10)
+
         const ataque = await Ataque.create({
             id_problema: id_problema,
             id_usuario_emisor: id_usuario_emisor,
             id_usuario_receptor: id_usuario_receptor,
             id_metodo_resolucion: id_metodo_resolucion,
             timestamp: new Date().toJSON().slice(0, 10),
-            tiempo: new Date().toJSON().slice(0, 10)
+            tiempo: tiempo_lim
 
         })
         
@@ -54,7 +68,7 @@ ControladorAtaque.crearAtaque = async (req, res) => {
 }
 
 //@desc: permite responder a un ataque
-//@route: PUT api/ataque/responder/
+//@route: PUT api/ataques/responder/
 ControladorAtaque.responderAtaque = async (req, res) => {
     console.log(req.body);
     const {id_problema, id_usuario_emisor, id_usuario_receptor, id_metodo_resolucion/*, timestamp*/} =req.body;
@@ -111,7 +125,7 @@ ControladorAtaque.responderAtaque = async (req, res) => {
 }
 
 //@desc: actualiza el estado del ataque a revisado
-//@route: PUT api/ataque/revisado/
+//@route: PUT api/ataques/revisado/
 ControladorAtaque.ataqueRevisado = async (req, res) => {
     console.log(req.body);
     const {id_problema, id_usuario_emisor, id_usuario_receptor, id_metodo_resolucion} =req.body;

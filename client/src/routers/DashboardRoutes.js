@@ -7,6 +7,7 @@ import { Navbar } from "../components/ui/Navbar";
 import { UsuariosLista } from "../components/usuario/UsuariosLista";
 import { Problemas } from "../components/problemas/Problemas";
 import { CodigoFuente } from "../components/codigoFuente/CodigoFuente";
+import { Ataques } from "../components/ataque/Ataques";
 import { ProblemasAsignados } from "../components/problemasAsignados/ProblemasAsignados";
 import { ListaAcciones } from "../components/dashboard/dashboard";
 import { Canje } from "../components/canje/Canje";
@@ -23,6 +24,7 @@ export const DashboardRoutes = () => {
             <Route path="problemas/:codigo_categoria" element={<Problemas />} />
             <Route path="usuarios/:codigo_sesion" element={<UsuariosLista />} />
             <Route path="codigoFuente/:codigo_problema_asignado" element={<CodigoFuente />} />
+            <Route path="ataque/:codigo_problema_asignado/:codigo_sesion" element={<Ataques />} />
             <Route path="problemasAsignados/:codigo_sesion" element={<ProblemasAsignados />} />
             <Route path="dashboard/:codigo_sesion" element={<ListaAcciones />} />
             <Route path="canje" element={<Canje />} />

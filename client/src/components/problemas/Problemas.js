@@ -71,9 +71,7 @@ export const Problemas = ({ nombreCategoria }) => {
 
       <div className="col-md-7 div-main" >
         <h1>Problemas</h1>
-        <ProblemasLista
-          problemasLista={problemas}
-        ></ProblemasLista>
+        <ProblemasLista problemasLista={problemas}  id_categoria={codigo_categoria}></ProblemasLista>
         </div>
       </div>
     </>
