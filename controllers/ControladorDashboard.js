@@ -3,7 +3,7 @@ const Dashboard = require('../models/accion');
 //require('dotenv').config();
 
 //@desc: permite obtener todas las acciones registradas en un quest
-//@route: POST api/acciones/accionesXquest/
+//@route: GET api/acciones/accionesXquest/
 ControladorDashboard.accionesXquest = async (req, res) => {
     const {id_quest} =req.body;
     
@@ -37,7 +37,7 @@ ControladorDashboard.accionesXquest = async (req, res) => {
 }
 
 //@desc: permite obtener un tipo de acciones sin asignar en un quest
-//@route: POST api/acciones/tipoAccionesSinReceptor/
+//@route: GET api/acciones/tipoAccionesSinReceptor/
 ControladorDashboard.tipoAccionesSinReceptorXquest = async (req, res) => {
     const {id_quest, id_usuario, id_metodo_resolucion} =req.body;
     
@@ -67,7 +67,7 @@ ControladorDashboard.tipoAccionesSinReceptorXquest = async (req, res) => {
 }
 
 //@desc: permite obtener un tipo de acciones en un quest
-//@route: POST api/acciones/tipoAcciones/
+//@route: GET api/acciones/tipoAcciones/
 ControladorDashboard.tipoAccionesXquest = async (req, res) => {
     const {id_quest, id_usuario, id_metodo_resolucion} =req.body;
     

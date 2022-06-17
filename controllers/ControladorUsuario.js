@@ -114,7 +114,7 @@ ControladorUsuario.login = async (req, res) => {
 }
 
 
-//@desc: permite autenticar a un usuario
+//@desc: permite obtener usuarios
 //@route: GET api/usuarios/
 ControladorUsuario.getUsuarios = async (req, res) => {
 
@@ -133,6 +133,39 @@ ControladorUsuario.getUsuarios = async (req, res) => {
         })
 
     }
+    
+}
+
+
+//@desc: permite obtener usuarios de una sesion del jugador
+//@route: GET api/usuarios/atacar
+ControladorUsuario.getUsuariosAtacar = async (req, res) => {
+    const {id_quest, id_usuario} =req.body;
+    try {
+
+        if(!id_quest || !id_usuario){
+            res.status(400).json({
+                ok: false,
+                msg: 'Campos requeridos son nulos o no válidos.'
+            })
+        }
+        console.log(id_quest)
+        console.log(id_usuario)
+
+        const usuariosAtaque = await sequelize.query('CALL selectUsuariosAtaque(:pQuest, :pUsuario)',
+            {replacements: { pQuest: id_quest, pUsuario: id_usuario}})
+        
+        res.json({message: usuariosAtaque });
+
+    } catch (error) {
+
+        console.log(error)
+        res.status(500).json({
+            ok: false,
+            msg: 'Error al obtener los posibles usuario para atacar.'
+        })
+        
+    }    
     
 }
 

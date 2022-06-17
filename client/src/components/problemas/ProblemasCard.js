@@ -1,9 +1,9 @@
 import React, { useContext } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Route, Routes } from 'react-router-dom'
 import { AuthContext } from '../../auth/authContext'
 import axios from 'axios'
 
-export const ProblemasCard = ({ nombre, link, categoria = '', id_problema_asignado = '', asignado = false, resuelto = 0 }) => {
+export const ProblemasCard = ({ nombre, link, codigo_categoria = '', id_problema_asignado = '', asignado = false, resuelto = 0, codigo_sesion}) => {
 
 
   const { usuario, dispatch } = useContext(AuthContext)
@@ -87,7 +87,7 @@ export const ProblemasCard = ({ nombre, link, categoria = '', id_problema_asigna
           {(resuelto===0||resuelto===3&&usuario.id_tipo_usuario != 2)&&
           <a type="button" className="btn btn-secondary btn-lg" onClick={() => { window.confirm('¿Está seguro de pedir ayuda?') ? onConfirm(id_problema_asignado, usuario.nombre_usuario) : onCancel() } }>Ayuda</a>}
           {(resuelto===2&&usuario.id_tipo_usuario != 2)&&
-          <a href='' type="button" className="btn btn-secondary btn-lg">Ataca</a>}
+          <a href={"/ataque/" + id_problema_asignado + "/" + codigo_sesion} rel="noreferrer" type="button" className="btn btn-secondary btn-lg">Ataca</a>}
 
 
           </div>

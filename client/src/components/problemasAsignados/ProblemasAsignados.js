@@ -40,7 +40,7 @@ export const ProblemasAsignados = () => {
       <div className="col-md-1 "></div>
 
       <div className="col-md-10 ">
-        <ProblemasLista problemasLista={problemas}></ProblemasLista>
+        <ProblemasLista problemasLista={problemas} codigo_sesion={codigo_sesion}></ProblemasLista>
       </div>
 
 
