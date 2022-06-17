@@ -65,7 +65,7 @@ export const CodigoFuente = () => {
   return (
     <div className="row">
       <div className="col-md-6 m-4">
-      <h1 className=" form-group m-6"    >Código Fuente {estado}</h1>
+      <h1 className=" form-group m-6"    >Código Fuente</h1>
       {(estado===1||estado===2)&&<form onSubmit={compilar}>
           <div className="form-group textarea1" cols="600" >
             <textarea

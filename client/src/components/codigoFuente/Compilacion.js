@@ -37,7 +37,7 @@ export const Compilacion = ({ output, statusCode, memory, cpuTime, compilar, set
 
   return (
     <div>
-      <h3>Output: {estado}</h3>
+      <h3>Output:</h3>
       <h4>  {output}</h4>
 
       <hr></hr>
