@@ -1,20 +1,45 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Globo } from '../puntaje/Globo'
 import { Moneda } from '../puntaje/Moneda'
 import { CanjeFila } from './CanjeFila'
+import axios from 'axios';
+import { AuthContext } from '../../auth/authContext'
 
 export const Canje = () => {
 
 
+    const [usuarios, setUsuarios] = useState([{categoria: '', monedas: '', globos: '' }])
+    const { usuario } = useContext(AuthContext)
 
-    const usuarios = [
-        { usuario: 'Mauricio Munoz - 2018319153', categoria: 'Backtracking', monedas: '0', globos: '0' },
-        { usuario: 'Mauricio Munoz - 2018319153', categoria: 'Greedy', monedas: '0', globos: '0' },
-        { usuario: 'Mauricio Munoz - 2018319153', categoria: 'Proba', monedas: '0', globos: '0' },
-        { usuario: 'Mauricio Munoz - 2018319153', categoria: 'Categoriaxd', monedas: '0', globos: '0' },
+    useEffect(() => {
+
+        llenarMonedasGlobos()
+   
+      }, [])
+
+    const llenarMonedasGlobos = async () => { 
+        try{
+
+            const res = await axios.post('/api/canje/getCanjes', {id_quest:"8080",id_usuario:"moore"})
+
+            console.log(res.data)
 
 
-    ]
+
+            setUsuarios([res.data])
+
+        }
+        catch(e){
+            setUsuarios([])
+            console.log(e)
+
+        }
+
+
+
+    }
+
+
     return (
         <div>
             <div>

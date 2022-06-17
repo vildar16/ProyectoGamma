@@ -2,6 +2,7 @@ const ControladorObtencionCanje = {};
 
 const Canje = require('../models/puntajeUsuarios');
 const Globo = require('../models/categoriasPorQuest');
+const Categoria = require('../models/categoria')
 
 //@desc: permite crear un canje
 //@route: POST api/canje/crear/
@@ -63,12 +64,23 @@ ControladorObtencionCanje.actualizarAchivers = async (req, res) => {
                 msg: 'Campos requeridos son nulos o no válidos.'
             })
         }
+
+        const monedas = await Canje.findAll({
+            attributes: ['monedas'],
+            where: {
+                id_quest: id_sesion,
+                id_categoria: id_categoria,
+                id_usuario:id_usuario_emisor
+            
+
+            }
+        })
         
         await Canje.update({
-            modedas: monedas + 1,
+            modedas: monedas[0].dataValues.monedas + 1,
         }, {
             where: {
-                id_sesion: id_sesion,
+                id_quest: id_sesion,
                 id_categoria: id_categoria,
                 id_usuario:id_usuario
             }
@@ -105,22 +117,44 @@ ControladorObtencionCanje.actualizarHelpers = async (req, res) => {
                 msg: 'Campos requeridos son nulos o no válidos.'
             })
         }
+
+        const monedasEmisor = await Canje.findAll({
+            attributes: ['monedas'],
+            where: {
+                id_quest: id_sesion,
+                id_categoria: id_categoria,
+                id_usuario:id_usuario_emisor
+            
+
+            }
+        })
+
+        const monedasReceptor = await Canje.findAll({
+            attributes: ['monedas'],
+            where: {
+                id_quest: id_sesion,
+                id_categoria: id_categoria,
+                id_usuario:id_usuario_receptor
+            
+
+            }
+        })
         
         await Canje.update({
-            modedas: monedas + 0.5,
+            monedas: monedasEmisor[0].dataValues.monedas + 0.5,
         }, {
             where: {
-                id_sesion: id_sesion,
+                id_quest: id_sesion,
                 id_categoria: id_categoria,
                 id_usuario:id_usuario_emisor
             }
         })
 
         await Canje.update({
-            modedas: monedas + 0.5,
+            monedas: monedasReceptor[0].dataValues.monedas + 0.5,
         }, {
             where: {
-                id_sesion: id_sesion,
+                id_quest: id_sesion,
                 id_categoria: id_categoria,
                 id_usuario:id_usuario_receptor
             }
@@ -156,12 +190,23 @@ ControladorObtencionCanje.actualizarKillers = async (req, res) => {
                 msg: 'Campos requeridos son nulos o no válidos.'
             })
         }
+
+        const monedas = await Canje.findAll({
+            attributes: ['monedas'],
+            where: {
+                id_quest: id_sesion,
+                id_categoria: id_categoria,
+                id_usuario:id_usuario
+            
+
+            }
+        })
         
         await Canje.update({
-            modedas: monedas + 2,
+            modedas: monedas[0].dataValues.monedas + 2,
         }, {
             where: {
-                id_sesion: id_sesion,
+                id_quest: id_sesion,
                 id_categoria: id_categoria,
                 id_usuario:id_usuario
             }
@@ -197,12 +242,24 @@ ControladorObtencionCanje.actualizarBuscador= async (req, res) => {
                 msg: 'Campos requeridos son nulos o no válidos.'
             })
         }
+
+
+        const monedas = await Canje.findAll({
+            attributes: ['monedas'],
+            where: {
+                id_quest: id_sesion,
+                id_categoria: id_categoria,
+                id_usuario:id_usuario
+            
+
+            }
+        })
         
         await Canje.update({
-            modedas: monedas + 1.25,
+            modedas: monedas[0].dataValues.monedas + 1.25,
         }, {
             where: {
-                id_sesion: id_sesion,
+                id_quest: id_sesion,
                 id_categoria: id_categoria,
                 id_usuario:id_usuario
             }
@@ -240,24 +297,50 @@ ControladorObtencionCanje.canjearGlobo = async (req, res) => {
         }
 
         const globo = await Globo.findAll({
-            attributes: ['id_sesion', 'id_categoria']
-        })
-        
-        await Canje.update({
-            monedas: monedas - globo.costo_globo,
-            globos: globos + 1
-        }, {
+            attributes: ['costo_globo'],
             where: {
-                id_sesion: id_sesion,
-                id_categoria: id_categoria,
-                id_usuario:id_usuario
+                id_sesion:id_sesion,
+                id_categoria:id_categoria
+
             }
         })
-        
-        res.status(200).json({
-            ok: true,
-            msg: `Cantidad Globos actualizada.`,
+
+        const monedas = await Canje.findAll({
+            attributes: ['monedas', 'globos'],
+            where: {
+                id_quest: id_sesion,
+                id_categoria: id_categoria,
+                id_usuario:id_usuario
+            
+
+            }
         })
+
+        if(monedas[0].dataValues.monedas >= globo[0].dataValues.costo_globo){
+
+            await Canje.update({
+                monedas: monedas[0].dataValues.monedas - globo[0].dataValues.costo_globo,
+                globos:  monedas[0].dataValues.globos + 1
+            }, {
+                where: {
+                    id_quest: id_sesion,
+                    id_categoria: id_categoria,
+                    id_usuario:id_usuario
+                }
+            })
+            
+            res.status(200).json({
+                ok: true,
+                msg: `Cantidad Globos actualizada.`,
+            })
+
+        }else {
+            res.status(400).json({
+                ok: false,
+                msg: 'No hay dinero'
+            })
+
+        }
 
     } catch (error) {
 
@@ -273,20 +356,30 @@ ControladorObtencionCanje.canjearGlobo = async (req, res) => {
 //@desc: permite canjer monedas por globos
 //@route: PUT api/canje/globos/
 ControladorObtencionCanje.todosJugadores = async (req, res) => {
-    console.log(req.body);
     const {id_quest, id_usuario} =req.body;
     
     try{
 
-
         const canjes = await Canje.findAll({
-            attributes: ['id_quest', 'id_categoria', 'id_usuario'],
+            attributes: ['id_quest', 'id_categoria', 'id_usuario', 'globos', 'monedas'],
             where: {
                 id_quest:id_quest,
                 id_usuario:id_usuario
             }
         })
-        res.json({message: canjes });
+
+        const categoria = await Categoria.findAll({
+            attributes: ["nombre"],
+            where: {
+                id_categoria: canjes[0].dataValues.id_categoria
+            }
+
+        })
+
+        console.log(categoria[0].dataValues.nombre)
+
+
+        res.json({categoria: categoria[0].dataValues.nombre, monedas:canjes[0].dataValues.monedas, globos:canjes[0].dataValues.globos });
 
     }catch(error){
 

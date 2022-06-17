@@ -22,6 +22,6 @@ router.route('/globos')
     .put(canjearGlobo)
 
     router.route('/getCanjes')
-    .get(todosJugadores)
+    .post(todosJugadores)
 
 module.exports = router;
