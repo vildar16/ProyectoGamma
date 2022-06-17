@@ -6,20 +6,29 @@ import axios from 'axios'
 export const Compilacion = ({ output, statusCode, memory, cpuTime, compilar, setCompilacionValues, script, estado }) => {
 
 
+  const [{ok, message}, setError] = useState({ok: false, message:''})
+  const [{okSucces, messageSucces}, setSucces] = useState({ok: false, message:''})
+
   const lenguajes = [{ nombre: 'java', code: 'java' }, { nombre: 'python', code: 'python3' }, { nombre: 'c++', code: 'cpp' }]
   const [lenguajeElegido, setLenguajeElegido] = useState({ lenguajeElegido: "java" })
   const {codigo_problema_asignado} = useParams()
 
 
   const subirCodigo = async(e)=>{
-    const res = await axios.put('/api/asignaciones/solucion/',
-    {
-      id_problema_asignado: codigo_problema_asignado,
-      codigo_fuente: script,
-      analisis: '0'
-    });
 
-    console.log(res)
+    try{
+
+      const res = await axios.put('/api/asignaciones/solucion/',
+      {
+        id_problema_asignado: codigo_problema_asignado,
+        codigo_fuente: script,
+        analisis: '0'
+      });
+      setSucces({okSucces: true, messageSucces: 'Respuesta enviada.'})
+      console.log(res)
+    }catch(e){
+      setError({ok: true, message: 'Error al enviar.'})
+    }
 
 
 
@@ -77,7 +86,10 @@ export const Compilacion = ({ output, statusCode, memory, cpuTime, compilar, set
           
           
         </div>
+        
       </div>
+      {(okSucces)&&   <div className="alert alert-success">{messageSucces}</div>}
+        {(ok)&&   <div className="alert alert-danger">{message}</div>}
     </div>
   )
 }
