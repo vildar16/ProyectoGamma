@@ -7,9 +7,9 @@ router.route('/accionesXquest')
     .get(accionesXquest)
 
 router.route('/tipoAccionesSinReceptor')
-    .get(tipoAccionesXquest)
+    .get(tipoAccionesSinReceptorXquest)
 
 router.route('/tipoAcciones')
-    .get(tipoAccionesSinReceptorXquest)
+    .get(tipoAccionesXquest)
 
 module.exports = router;

@@ -19,10 +19,7 @@ ControladorDashboard.accionesXquest = async (req, res) => {
         const dashboard = await sequelize.query('CALL selectAcciones(:pQuest)',
             {replacements: { pQuest: id_quest }})
         
-        res.status(200).json({
-            ok: true,
-            msg: `Acciones obtenidas correctamente.`
-        })
+        res.json({message: dashboard });
 
     } catch (error) {
 
@@ -52,10 +49,7 @@ ControladorDashboard.tipoAccionesSinReceptorXquest = async (req, res) => {
         const dashboard = await sequelize.query('CALL selectTipoAccionesSinReceptor(:pQuest, :pUsuario, :pMetodo)',
             {replacements: { pQuest: id_quest, pUsuario: id_usuario, pMetodo: id_metodo_resolucion }})
         
-        res.status(200).json({
-            ok: true,
-            msg: `Tipo de acciones sin asignación obtenidas correctamente.`
-        })
+        res.json({message: dashboard });
 
     } catch (error) {
 
@@ -71,24 +65,21 @@ ControladorDashboard.tipoAccionesSinReceptorXquest = async (req, res) => {
 //@desc: permite obtener un tipo de acciones en un quest
 //@route: POST api/acciones/tipoAcciones/
 ControladorDashboard.tipoAccionesXquest = async (req, res) => {
-    const {id_quest, id_usuario} =req.body;
+    const {id_quest, id_usuario, id_metodo_resolucion} =req.body;
     
     try {
 
-        if(!id_quest || !id_usuario){
+        if(!id_quest || !id_usuario || !id_metodo_resolucion){
             res.status(400).json({
                 ok: false,
                 msg: 'Campos requeridos son nulos o no válidos.'
             })
         }
 
-        const dashboard = await sequelize.query('CALL selectTipoAccionesSinReceptor(:pQuest, :pUsuario)',
-            {replacements: { pQuest: id_quest, pUsuario: id_usuario}})
+        const dashboard = await sequelize.query('CALL selectTipoAcciones(:pQuest, :pUsuario, :pMetodo)',
+            {replacements: { pQuest: id_quest, pUsuario: id_usuario, pMetodo: id_metodo_resolucion }})
         
-        res.status(200).json({
-            ok: true,
-            msg: `Tipo de acciones obtenidas correctamente.`
-        })
+        res.json({message: dashboard });
 
     } catch (error) {
 
