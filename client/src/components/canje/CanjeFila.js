@@ -1,6 +1,33 @@
-import React from 'react'
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
+export const CanjeFila = ({ categoria, monedas, globos, sesion, id_categoria, id_usuario }) => {
 
-export const CanjeFila = ({ categoria, monedas, globos }) => {
+
+    const [{precio}, setPrecio] = useState({precio:''})
+
+    useEffect(() => {
+
+        precioGlobo()
+   
+      }, [])
+
+    const comprar = async () => {
+
+        const res = await axios.put('/api/canje/globos', {id_sesion: sesion, id_categoria: id_categoria, id_usuario: id_usuario})
+        window.location.reload(false)
+
+
+    }
+
+    const precioGlobo = async () => {
+
+            const res = await axios.post('/api/canje/precioGlobo', {id_sesion: "8080", id_categoria: "56"})
+            setPrecio({precio:res.data.msg})
+
+
+    }
+
+
   return (
         <div className="row">
             <div className="w-100"></div>
@@ -19,10 +46,10 @@ export const CanjeFila = ({ categoria, monedas, globos }) => {
                 </div>
                 <div className="col-md-6">
 
-                    <button className="btn btn-success">
+                    <button className="btn btn-success" onClick = {comprar}>
                         Comprar
                     </button>
-                    Precio: 1
+                    Precio: {precio}
                 </div>
             </div>
             </div>

@@ -2,7 +2,8 @@ const ControladorObtencionCanje = {};
 
 const Canje = require('../models/puntajeUsuarios');
 const Globo = require('../models/categoriasPorQuest');
-const Categoria = require('../models/categoria')
+const Categoria = require('../models/categoria');
+
 
 //@desc: permite crear un canje
 //@route: POST api/canje/crear/
@@ -354,32 +355,46 @@ ControladorObtencionCanje.canjearGlobo = async (req, res) => {
 }
 
 //@desc: permite canjer monedas por globos
+//@route: post api/canje/precioGlobo/
+ControladorObtencionCanje.precioGlobo = async (req, res) => {
+    const {id_sesion, id_categoria} =req.body;
+    
+    try{
+
+        const globo = await Globo.findAll({
+            attributes: ['costo_globo'],
+            where: {
+                id_sesion:id_sesion,
+                id_categoria:id_categoria
+
+            }
+        })
+
+        res.json({msg : globo[0].dataValues.costo_globo});
+
+    }catch(error){
+
+        console.log(error)
+        res.status(500).json({
+            ok: false,
+            msg: 'Error al obtener los precio del globo.'
+        })
+
+    }    
+}
+
+//@desc: permite canjer monedas por globos
 //@route: PUT api/canje/globos/
 ControladorObtencionCanje.todosJugadores = async (req, res) => {
     const {id_quest, id_usuario} =req.body;
     
     try{
 
-        const canjes = await Canje.findAll({
-            attributes: ['id_quest', 'id_categoria', 'id_usuario', 'globos', 'monedas'],
-            where: {
-                id_quest:id_quest,
-                id_usuario:id_usuario
-            }
-        })
+        const canjes = await sequelize.query('CALL getCanjes(:pQuest, :pUsuario)',
+            {replacements: { pQuest: id_quest, pUsuario:id_usuario }})
+        
+        res.json(canjes);
 
-        const categoria = await Categoria.findAll({
-            attributes: ["nombre"],
-            where: {
-                id_categoria: canjes[0].dataValues.id_categoria
-            }
-
-        })
-
-        console.log(categoria[0].dataValues.nombre)
-
-
-        res.json({categoria: categoria[0].dataValues.nombre, monedas:canjes[0].dataValues.monedas, globos:canjes[0].dataValues.globos });
 
     }catch(error){
 

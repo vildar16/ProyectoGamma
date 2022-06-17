@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const { crearCanje, actualizarAchivers, actualizarHelpers, actualizarKillers, actualizarBuscador, canjearGlobo, todosJugadores} = require('../controllers/ControladorObtencionCanje');
+const { crearCanje, actualizarAchivers, actualizarHelpers, actualizarKillers, actualizarBuscador, canjearGlobo, todosJugadores, precioGlobo} = require('../controllers/ControladorObtencionCanje');
 
 router.route('/crear')
     .post(crearCanje)
@@ -23,5 +23,8 @@ router.route('/globos')
 
     router.route('/getCanjes')
     .post(todosJugadores)
+
+router.route('/precioGlobo')
+    .post(precioGlobo)
 
 module.exports = router;

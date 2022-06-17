@@ -8,7 +8,7 @@ import { AuthContext } from '../../auth/authContext'
 export const Canje = () => {
 
 
-    const [usuarios, setUsuarios] = useState([{categoria: '', monedas: '', globos: '' }])
+    const [usuarios, setUsuarios] = useState([{id_quest:'', id_categoria:'',nombre_categoria:'', id_usuario:'', globos:'', monedas:''}])
     const { usuario } = useContext(AuthContext)
 
     useEffect(() => {
@@ -20,13 +20,13 @@ export const Canje = () => {
     const llenarMonedasGlobos = async () => { 
         try{
 
-            const res = await axios.post('/api/canje/getCanjes', {id_quest:"8080",id_usuario:"moore"})
+            const res = await axios.post('/api/canje/getCanjes', {id_quest:usuario.id_quest,id_usuario:usuario.id_usuario})
 
             console.log(res.data)
 
 
 
-            setUsuarios([res.data])
+            setUsuarios(res.data)
 
         }
         catch(e){
@@ -72,9 +72,12 @@ export const Canje = () => {
                                     usuarios.map((usuario) => (
 
                                         <CanjeFila
-                                            categoria={usuario.categoria}
+                                            categoria={usuario.nombre_categoria}
                                             monedas={usuario.monedas}
                                             globos={usuario.globos}
+                                            sesion={usuario.id_quest}
+                                            id_categoria={usuario.id_categoria}
+                                            id_usuario={usuario.id_usuario}
                                         >
 
                                         </CanjeFila>
