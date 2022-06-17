@@ -23,3 +23,22 @@ services:
         - expressapp
         - reactapp
     restart: always
+
+
+  db:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    volumes:
+      - ./mysql-dump:/docker-entrypoint-initdb.d
+    environment:
+      MYSQL_ROOT_PASSWORD: passgamma
+      MYSQL_DATABASE: gamma
+      MYSQL_USER: gammauser
+      MYSQL_PASSWORD: passgamma
+      
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
