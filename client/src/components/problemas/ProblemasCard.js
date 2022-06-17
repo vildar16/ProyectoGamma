@@ -75,10 +75,10 @@ export const ProblemasCard = ({ nombre, link, categoria = '', id_problema_asigna
           <div className="col-md-2" >
           
 
-          {(resuelto===0&&usuario.id_tipo_usuario != 2)&&<h6>Asignado</h6>}
-          {(resuelto===1&&usuario.id_tipo_usuario != 2)&&<h6>En revisión</h6>}
-          {(resuelto===2&&usuario.id_tipo_usuario != 2)&&<h6>Aprobado</h6>}
-          {(resuelto===3&&usuario.id_tipo_usuario != 2)&&<h6>Corregir</h6>}
+          {(resuelto===0&&usuario.id_tipo_usuario != 2)&&<h4>Asignado</h4>}
+          {(resuelto===1&&usuario.id_tipo_usuario != 2)&&<h4>En revisión</h4>}
+          {(resuelto===2&&usuario.id_tipo_usuario != 2)&&<h4>Aprobado</h4>}
+          {(resuelto===3&&usuario.id_tipo_usuario != 2)&&<h4>Corregir</h4>}
 
 
           </div>
