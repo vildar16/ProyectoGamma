@@ -5,7 +5,7 @@
     border-radius: 5px;
     box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
     padding: 5%;
-    background: #f9be02;
+    background: #FFAEAE;
 }
 .login-form-1 h3{
     text-align: center;
@@ -15,7 +15,7 @@
     border-radius: 5px;
     box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.4), 0 9px 26px 0 rgba(0, 0, 0, 0.4);
     padding: 5%;
-    background: #f53240;
+    background: #E13D3D;
 }
 .login-form-2 h3{
     text-align: center;
@@ -57,18 +57,18 @@
 }
 .login-form-1 .btnSubmit{
     color: #fff;
-    background-color: #43c000;
+    background-color: #800000;
     box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.1), 0 6px 15px 0 rgba(0, 0, 0, 0.4); 
     color: #fff1ff;
 }
 .login-form-2 .btnSubmit{
-    background-color: #43c000;
+    background-color: #800000;
     box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.1), 0 6px 15px 0 rgba(0, 0, 0, 0.4); 
     color: #fff1ff;
 }
 
 .login-form-2 .btnSubmit:hover{
-    background-color: #58cc02;
+    background-color: #5A2020;
     box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.01), 0 3px 3px 0 rgba(0, 0, 0, 0.4); 
     color: #fff1ff;
 }

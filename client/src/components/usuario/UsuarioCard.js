@@ -7,7 +7,7 @@ export const UsuarioCard = ({ usuario, setViendo, setVerProblemas, verProblemas,
 
 
   const style = {
-    color: '#43c000',
+    color: '#E13D3D',
     fontSize: "2em",
     filter: "drop-shadow(2px 2px 2px rgb(0 0 0 / 0.3))"
   }

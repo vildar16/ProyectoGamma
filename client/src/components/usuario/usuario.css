@@ -15,12 +15,12 @@
 }
 
 .header{
-  background: #f53240;
+  background: #E13D3D;
 
 }
 
 .categoria{
-  background: #f53240;
+  background: #E13D3D;
 
 }
 
@@ -70,7 +70,7 @@
    
   /* Handle */
   ::-webkit-scrollbar-thumb {
-    background: #f53240; 
+    background: #E13D3D; 
     border-radius: 10px;
   }
   
